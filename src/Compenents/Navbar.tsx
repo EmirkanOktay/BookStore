@@ -94,7 +94,9 @@ const Navbar: React.FC = () => {
         'Self-help'
     ];
     const [drawerOpen, setDrawerOpen] = useState(false);
-
+    const [drawerOpenForFavorite, setDrawerOpenForFavorite] = useState(false);
+    const [drawerOpenForCart, setDrawerOpenForCart] = useState(false);
+    const [drawerOpenForAccount, setDrawerOpenForAccount] = useState(false);
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMenuAnchorEl(event.currentTarget);
@@ -107,6 +109,18 @@ const Navbar: React.FC = () => {
     const toggleDrawer = () => {
         setDrawerOpen(!drawerOpen);
     };
+    const toggleDrawerForFav = () => {
+        setDrawerOpenForFavorite(!drawerOpenForFavorite);
+    }
+    const toggleDrawerForAccount = () => {
+        setDrawerOpenForAccount(!drawerOpenForAccount);
+    }
+
+    const toggleDrawerForCart = () => {
+        setDrawerOpenForCart(!drawerOpenForCart);
+    }
+
+
 
 
     return (
@@ -208,21 +222,58 @@ const Navbar: React.FC = () => {
                             ))}
                         </Menu>
 
-                        <StyledIconButton color="inherit" className='favorite'>
+                        <StyledIconButton color="inherit" className="favorite" onClick={toggleDrawerForFav}>
                             <Badge badgeContent={2} color="error">
                                 <FavoriteIcon />
                             </Badge>
                         </StyledIconButton>
 
-                        <StyledIconButton color="inherit" className='icons'>
+                        <Drawer
+                            anchor="right"
+                            open={drawerOpenForFavorite}
+                            onClose={toggleDrawerForFav}
+                        >
+                            <Box sx={{ width: 250, padding: 2 }}>
+                                <Typography variant="h6" sx={{ marginBottom: 2, borderBottom: '1px solid' }}>
+                                    Later...
+                                </Typography>
+
+                            </Box>
+                        </Drawer>
+
+                        <StyledIconButton color="inherit" className='icons' onClick={toggleDrawerForCart}>
                             <Badge badgeContent={5} color="error">
                                 <ShoppingCartIcon />
                             </Badge>
                         </StyledIconButton>
+                        <Drawer
+                            anchor="right"
+                            open={drawerOpenForCart}
+                            onClose={toggleDrawerForCart}
+                        >
+                            <Box sx={{ width: 250, padding: 2 }}>
+                                <Typography variant="h6" sx={{ marginBottom: 2, borderBottom: '1px solid' }}>
+                                    Later...
+                                </Typography>
 
-                        <StyledIconButton color="inherit" className='icons'>
+                            </Box>
+                        </Drawer>
+
+                        <StyledIconButton color="inherit" className='icons' onClick={toggleDrawerForAccount}>
                             <AccountCircleIcon />
                         </StyledIconButton>
+                        <Drawer
+                            anchor="right"
+                            open={drawerOpenForAccount}
+                            onClose={toggleDrawerForAccount}
+                        >
+                            <Box sx={{ width: 250, padding: 2 }}>
+                                <Typography variant="h6" sx={{ marginBottom: 2, borderBottom: '1px solid' }}>
+                                    Later...
+                                </Typography>
+
+                            </Box>
+                        </Drawer>
                     </Box>
                 </Toolbar>
             </AppBar>
