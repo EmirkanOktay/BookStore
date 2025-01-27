@@ -1,4 +1,4 @@
-@media (max-width : 850px) {
+@media (max-width : 900px) {
     .menu {
         display: none;
     }
@@ -6,6 +6,6 @@
 
 @media (max-width: 1050px) {
     .favorite {
-        display: none;
+        display: none !important;
     }
 }

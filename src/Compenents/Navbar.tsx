@@ -19,7 +19,7 @@ import { Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
-import '../Css/Navbar.css'
+import '../Css/Navbar.css';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -133,6 +133,7 @@ const Navbar: React.FC = () => {
 
                     <Button className='menu'
                         sx={{
+                            display: { xs: 'none', md: 'flex' },
                             borderRadius: '10px',
                             padding: { xs: '0 8px', sm: '6px 16px' },
                             '&:hover': {
@@ -151,7 +152,7 @@ const Navbar: React.FC = () => {
                     <Button
                         className="responsive-menu"
                         sx={{
-                            display: { xs: 'block', sm: 'none' }, // Make sure it's only visible on small screens
+                            display: { xs: 'block', sm: 'block', md: 'none' },
                             borderRadius: '10px',
                             padding: { xs: '0 8px', sm: '6px 16px' },
                         }}
@@ -171,7 +172,7 @@ const Navbar: React.FC = () => {
                             </Typography>
                             {menuItems.map((item) => (
                                 <MenuItem key={item} onClick={handleMenuClose}>
-                                    {item}
+                                    <p style={{ borderBottom: '1px solid red' }}>{item}</p>
                                 </MenuItem>
                             ))}
                         </Box>
@@ -207,19 +208,19 @@ const Navbar: React.FC = () => {
                             ))}
                         </Menu>
 
-                        <StyledIconButton size="large" color="inherit" className='favorite'>
+                        <StyledIconButton color="inherit" className='favorite'>
                             <Badge badgeContent={2} color="error">
                                 <FavoriteIcon />
                             </Badge>
                         </StyledIconButton>
 
-                        <StyledIconButton size="large" color="inherit" className='icons'>
+                        <StyledIconButton color="inherit" className='icons'>
                             <Badge badgeContent={5} color="error">
                                 <ShoppingCartIcon />
                             </Badge>
                         </StyledIconButton>
 
-                        <StyledIconButton size="large" color="inherit" className='icons'>
+                        <StyledIconButton color="inherit" className='icons'>
                             <AccountCircleIcon />
                         </StyledIconButton>
                     </Box>
