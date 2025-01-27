@@ -1,0 +1,10 @@
+.Carousel {
+    height: 40vh;
+    cursor: pointer;
+}
+
+.Carousel .images-div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
