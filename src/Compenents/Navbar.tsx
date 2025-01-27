@@ -17,6 +17,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import { Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
 import '../Css/Navbar.css';
@@ -181,12 +182,26 @@ const Navbar: React.FC = () => {
                         onClose={toggleDrawer}
                     >
                         <Box sx={{ width: 250, padding: 2 }}>
-                            <Typography variant="h6" sx={{ marginBottom: 2, borderBottom: '1px solid' }}>
-                                Menu
+                            <Typography variant="h6" sx={{ marginBottom: 2, fontWeight: 'bold' }}>
+                                Categories
                             </Typography>
-                            {menuItems.map((item) => (
-                                <MenuItem key={item} onClick={handleMenuClose}>
-                                    <p style={{ borderBottom: '1px solid red' }}>{item}</p>
+                            <Divider sx={{ marginBottom: 2 }} />
+                            {menuItems.map((item, index) => (
+                                <MenuItem
+                                    key={index}
+                                    onClick={toggleDrawer}
+                                    sx={{
+                                        padding: '10px 16px',
+                                        borderRadius: '8px',
+                                        marginBottom: '8px',
+                                        transition: 'background-color 0.3s ease',
+                                        '&:hover': {
+                                            backgroundColor: '#f5f5f5',
+                                            color: 'red',
+                                        },
+                                    }}
+                                >
+                                    {item}
                                 </MenuItem>
                             ))}
                         </Box>
