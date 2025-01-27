@@ -1,10 +1,17 @@
 .Carousel {
-    height: 40vh;
+    height: auto;
     cursor: pointer;
+    width: 100%;
 }
 
 .Carousel .images-div img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+@media (max-width : 900px) {
+    .Carousel {
+        overflow: hidden;
+    }
 }

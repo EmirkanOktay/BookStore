@@ -8,7 +8,7 @@ function HeaderNav() {
     return (
         <Box
             sx={{
-                display: { xs: 'none', sm: 'block' }
+                display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' }
             }}
         >
             <Typography

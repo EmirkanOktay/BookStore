@@ -13,7 +13,7 @@ function CaresoualHeader() {
             infiniteLoop={true}
             autoPlay={true}
             showIndicators={false}
-            interval={2500}>
+            interval={6000}>
             <div className="images-div">
                 <img src={Carousel1} alt="" />
             </div>
