@@ -1,52 +1,47 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../Redux/Store";
 import { useEffect } from "react";
-import { getLatestBook } from "../Redux/LatestBookSlicer";
+import { get1984, getWarAndPeace, getHarryPotter, getCrimeandPunishment } from '../Redux/TopSellBooksSlicer';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { styled } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
-import '../Css/LatestBooks.css';
-
-export const decidePrice = () => {
-    let price = Math.floor(Math.random() * 101);
-
-    if (price < 10) {
-        price = Math.floor(Math.random() * 101);
-    }
-    return price;
-}
-
-export const StyledButton = styled(Button)(({ theme }) => ({
-    backgroundColor: '#f50057',
-    color: 'white',
-    '&:hover': {
-        backgroundColor: '#c51162',
-    },
-    padding: '8px 16px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: '20px',
-}));
+import { decidePrice } from "./LatestBooks";
+import { StyledButton } from "./LatestBooks";
 
 
-
-function LatestBooks() {
-
+function TopSeller() {
     const dispatch = useDispatch<AppDispatch>();
 
-    const { load, error, books } = useSelector((state: RootState) => state.latestBook);
+    const { load, error, books1984, booksWarAndPeace, booksHarryPotter, booksCrimeAndPunishment } = useSelector((state: RootState) => state.topSellBook);
 
     useEffect(() => {
-        dispatch(getLatestBook());
+        dispatch(get1984());
+        dispatch(getWarAndPeace());
+        dispatch(getHarryPotter());
+        dispatch(getCrimeandPunishment());
     }, [dispatch]);
 
+
+    let topSellerBooksArray: any = [];
+
+    books1984.forEach((book) => {
+        topSellerBooksArray.push(book);
+    })
+    booksCrimeAndPunishment.forEach((book) => {
+        topSellerBooksArray.push(book);
+    })
+    booksHarryPotter.forEach((book) => {
+        topSellerBooksArray.push(book);
+    })
+    booksWarAndPeace.forEach((book) => {
+        topSellerBooksArray.push(book);
+    })
+
+
     return (
-        <Box sx={{ textAlign: 'center', margin: '25px' }}>
+        <Box sx={{ textAlign: 'center', marginTop: '70px' }}>
             {load === 'Loading' && (
                 <Grid container spacing={4} justifyContent="center" marginTop={2}>
                     {Array.from({ length: 4 }).map((_, index) => (
@@ -102,12 +97,11 @@ function LatestBooks() {
                                 margin: '0 auto'
                             }}
                         >
-                            Latest Released Books
+                            Best Selling Books
                         </p>
                     </Typography>
-
                     <Grid container spacing={4} justifyContent="center" marginTop={2}>
-                        {books.map((book, index) => (
+                        {topSellerBooksArray.map((book: any, index: number) => (
                             <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
                                 <Box
                                     sx={{
@@ -164,4 +158,4 @@ function LatestBooks() {
     );
 }
 
-export default LatestBooks;
+export default TopSeller;

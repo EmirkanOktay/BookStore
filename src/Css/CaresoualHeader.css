@@ -10,8 +10,13 @@
     object-fit: cover;
 }
 
-@media (max-width : 900px) {
+
+@media (max-width : 1000px) {
     .Carousel {
         overflow: hidden;
+    }
+
+    .Carousel-Container {
+        padding-top: 55px;
     }
 }

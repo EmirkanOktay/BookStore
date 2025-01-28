@@ -9,6 +9,7 @@ function HeaderNav() {
     return (
         <Box
             sx={{
+                paddingTop: '64px',
                 display: { xs: 'none', sm: 'none', md: 'none', lg: 'block' }
             }}
         >

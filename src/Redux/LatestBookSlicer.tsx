@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const apiKey = import.meta.env.VITE_Book_Key;
+export const apiKey = import.meta.env.VITE_Book_Key;
 const apiLink = `https://www.googleapis.com/books/v1/volumes?q=publishedDate:2025&maxResults=4&key=&${apiKey}`;
 
 export interface BookState {
@@ -16,6 +16,7 @@ const initialState: BookState = {
     books: [],
 };
 
+
 export const getLatestBook = createAsyncThunk("getLastBooks", async () => {
 
     const response = await axios.get(apiLink);
@@ -23,8 +24,8 @@ export const getLatestBook = createAsyncThunk("getLastBooks", async () => {
     return data
 })
 
-const latestBookSlicer = createSlice({
-    name: "latestBooks",
+const topSellBooks = createSlice({
+    name: "topSellBooks",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -43,4 +44,4 @@ const latestBookSlicer = createSlice({
             })
     }
 })
-export default latestBookSlicer.reducer;
+export default topSellBooks.reducer;

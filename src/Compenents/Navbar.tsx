@@ -126,7 +126,7 @@ const Navbar: React.FC = () => {
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" elevation={0} sx={{ backgroundColor: 'white', color: 'black' }}>
+            <AppBar position="fixed" elevation={0} sx={{ backgroundColor: 'white', color: 'black' }}>
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Typography
                         variant="h6"

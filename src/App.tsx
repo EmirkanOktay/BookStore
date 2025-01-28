@@ -1,20 +1,11 @@
 import './App.css';
-import CaresoualHeader from './Compenents/CaresoualHeader';
-import LatestBooks from './Compenents/LatestBooks';
-import SectionTop from './Compenents/SectionTop';
-import Header from './Pages/Header';
-
+import Index from './Pages/Index';
 
 function App() {
   return (
     <div>
 
-      <div>
-        <Header />
-        <CaresoualHeader />
-        <SectionTop />
-        <LatestBooks />
-      </div>
+      <Index />
 
     </div>
   );

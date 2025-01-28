@@ -1,5 +1,5 @@
-import HeaderNav from "../Compenents/HeaderNav"
-import Navbar from "../Compenents/Navbar"
+import HeaderNav from "./HeaderNav"
+import Navbar from "./Navbar"
 
 function Header() {
     return (

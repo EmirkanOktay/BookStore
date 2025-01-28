@@ -7,21 +7,24 @@ import '../Css/CaresoualHeader.css'
 function CaresoualHeader() {
 
     return (
-        <Carousel className="Carousel"
-            showThumbs={false}
-            showArrows={false}
-            showStatus={false}
-            infiniteLoop={true}
-            autoPlay={true}
-            showIndicators={false}
-            interval={6000}>
-            <div className="images-div">
-                <img src={Carousel1} alt="" />
-            </div>
-            <div>
-                <img src={Carousel2} />
-            </div>
-        </Carousel>
+        <div className="Carousel-Container">
+            <Carousel className="Carousel"
+                showThumbs={false}
+                showArrows={false}
+                showStatus={false}
+                infiniteLoop={true}
+                autoPlay={true}
+                showIndicators={false}
+                interval={6000}>
+                <div className="images-div">
+                    <img src={Carousel1} alt="" />
+                </div>
+                <div>
+                    <img src={Carousel2} />
+                </div>
+            </Carousel>
+        </div>
+
 
     )
 }
