@@ -4,14 +4,18 @@ import LatestBooks from './Compenents/LatestBooks';
 import SectionTop from './Compenents/SectionTop';
 import Header from './Pages/Header';
 
-function App() {
 
+function App() {
   return (
     <div>
-      <Header />
-      <CaresoualHeader />
-      <SectionTop />
-      <LatestBooks />
+
+      <div>
+        <Header />
+        <CaresoualHeader />
+        <SectionTop />
+        <LatestBooks />
+      </div>
+
     </div>
   );
 }
