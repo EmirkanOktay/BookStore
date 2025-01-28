@@ -5,6 +5,8 @@ import TopSeller from '../Compenents/TopSeller';
 import Header from '../Compenents/Header';
 import ScrollToTop from '../Compenents/ScrollToTop';
 import Banner from '../Compenents/Banner';
+import Section from '../Compenents/Section';
+import SectionSecond from '../Compenents/SectionSecond';
 
 
 function Index() {
@@ -16,6 +18,8 @@ function Index() {
             <LatestBooks />
             <TopSeller />
             <Banner />
+            <Section />
+            <SectionSecond />
             <ScrollToTop />
         </div>
     )

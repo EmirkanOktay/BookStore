@@ -1,0 +1,43 @@
+.group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    color: grey;
+    font-family: Arial, sans-serif;
+    border-right: 1px solid red;
+    width: 300px;
+}
+
+.group2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    color: grey;
+    font-family: Arial, sans-serif;
+    width: 300px;
+
+}
+
+.icon {
+    color: red;
+    margin-right: 8px;
+    position: relative;
+    top: 5px;
+}
+
+.box-section {
+    margin-top: 30px;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+}
+
+@media (max-width : 1200px) {
+    .box-section {
+        display: none;
+    }
+}

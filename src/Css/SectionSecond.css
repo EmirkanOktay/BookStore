@@ -1,0 +1,55 @@
+.box-secondSection {
+    margin-top: 20px;
+    text-align: center;
+    /* Center text */
+    max-width: 500px;
+    /* Limit the width for better readability */
+    margin: 0 auto;
+    /* Center the box */
+}
+
+.span-second {
+    font-size: 28px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.button-sectionSecond {
+    background-color: red !important;
+    color: white !important;
+    border-radius: 8px !important;
+    width: 180px !important;
+    padding: 12px !important;
+    text-transform: uppercase !important;
+    font-weight: bold !important;
+    transition: background-color 0.3s ease !important;
+}
+
+
+.p-sectionSecond {
+    font-size: 16px;
+    font-weight: 400;
+    color: #666;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .box-secondSection {
+        padding: 20px 15px;
+    }
+
+    .span-second {
+        font-size: 24px;
+    }
+
+    .button-sectionSecond {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .p-sectionSecond {
+        font-size: 14px;
+    }
+}
