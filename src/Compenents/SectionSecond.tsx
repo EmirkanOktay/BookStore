@@ -1,7 +1,9 @@
 import { Box, Button, Typography } from '@mui/material';
 import '../Css/SectionSecond.css';
+import { useNavigate } from 'react-router-dom';
 
 function SectionSecond() {
+    const navigate = useNavigate();
     return (
         <Box
             sx={{
@@ -17,7 +19,7 @@ function SectionSecond() {
         >
             <Typography className='box-secondSection'>
                 <span className='span-second'>Sign up for our Newsletter</span>
-                <Button className='button-sectionSecond'>Sign Up</Button>
+                <Button className='button-sectionSecond' onClick={() => navigate("/signup")}>Sign Up</Button>
                 <p className='p-sectionSecond'>Tell us what books you love.</p>
             </Typography>
         </Box>

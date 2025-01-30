@@ -1,9 +1,24 @@
+import { ToastContainer } from 'react-toastify';
 import './App.css';
-import Index from './Pages/Index';
 
 function App() {
   return (
-    <div></div>
+    <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        style={{
+          fontFamily: 'Arial, sans-serif',
+        }}
+      />
+    </div>
   );
 }
 

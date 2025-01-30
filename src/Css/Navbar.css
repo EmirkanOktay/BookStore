@@ -18,7 +18,7 @@
 
 .signUp-drawer #email:focus {
     outline: none;
-    border: 2px solid red;
+    border: 2px solid rgb(0, 0, 0);
 }
 
 .signUp-drawer #password {
@@ -36,7 +36,7 @@
 
 .signUp-drawer #password:focus {
     outline: none;
-    border: 2px solid red;
+    border: 2px solid rgb(0, 0, 0);
 }
 
 .show-password {

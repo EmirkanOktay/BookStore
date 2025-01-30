@@ -1,0 +1,33 @@
+.signUp-box {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    background-color: white;
+}
+
+.signUp-drawer #name-signup,
+#lastNameSignUp {
+    width: 100%;
+    height: 30px;
+    padding: 2px 3px;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 3px solid rgb(240, 240, 240);
+    background-color: transparent;
+    font-size: 16px;
+    color: #333;
+    box-shadow: #888;
+}
+
+.signUp-drawer #name-signup:focus {
+    outline: none;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.signUp-drawer #lastNameSignUp:focus {
+    outline: none;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.input {
+    margin-bottom: 20px;
+}

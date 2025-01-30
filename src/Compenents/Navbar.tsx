@@ -24,6 +24,17 @@ import '../Css/Navbar.css';
 import { memberStatus } from '../MemberStatus/Member';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import { Formik, Form } from "formik";
+import { validationSchema } from '../Yup/Yup';
+
+
+export interface formValuesForLogin {
+    email: string,
+    password: string,
+
+}
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -83,6 +94,8 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const Navbar: React.FC = () => {
+    const navigate = useNavigate();
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [menuAnchorEl, setMenuAnchorEl] = React.useState<null | HTMLElement>(null);
     const menuItems = [
@@ -130,6 +143,14 @@ const Navbar: React.FC = () => {
         setVisibiltyOfPassword(!visibiltyOfPassword);
     }
 
+    const initalValues: formValuesForLogin = {
+        email: "",
+        password: ""
+    }
+
+    const handleSubmit = (values: formValuesForLogin) => {
+        toast.success("You are logged in");
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -145,11 +166,12 @@ const Navbar: React.FC = () => {
                             fontWeight: 'bold',
                             flexGrow: { xs: 1, sm: 0 },
                             fontSize: { xs: '14px', sm: 'inherit', md: '20px' },
+                            cursor: 'pointer',
                             '@media (max-width: 950px)': {
                                 display: 'none'
                             },
                         }}
-                    >
+                        onClick={() => navigate("/")} >
                         BookStore
                     </Typography>
 
@@ -289,7 +311,8 @@ const Navbar: React.FC = () => {
                                                     {visibiltyOfPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
                                                 </div>
                                             </div>
-                                            <p className='forget-password'>Forget Password</p>
+                                            <p className='forget-password' onClick={() => navigate("/forget-password")}>Forget Password</p>
+
                                             <Button className="navbar-accountButton" sx={{
                                                 marginTop: '20px',
                                                 width: '100%',
@@ -305,7 +328,7 @@ const Navbar: React.FC = () => {
                                                 backgroundColor: 'black',
                                                 color: 'white',
                                                 borderRadius: '13px'
-                                            }}>
+                                            }} onClick={() => navigate("/signup")}>
                                                 Sign Up
                                             </Button>                                    </div>
                                     </>
@@ -344,67 +367,101 @@ const Navbar: React.FC = () => {
                         >
                             <Box sx={{ width: 300, padding: 2, marginTop: '50px' }}>
                                 {memberStatus === false ? (
-                                    <>
-                                        <Typography sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center' }}>
-                                            <AccountCircleIcon sx={{ fontSize: '40px' }} />
-                                        </Typography>
-                                        <Typography sx={{ borderBottom: '1px solid', display: 'flex', justifyContent: 'center' }}>
-                                            My Account
-                                        </Typography>
-                                        <div className='signUp-drawer'>
-                                            <label htmlFor="">E-Mail</label>
-                                            <input type="text" placeholder='E-Mail' style={{ display: 'block', marginTop: '10px', marginBottom: '10px' }} id='email' />
-                                            <label htmlFor="password" style={{ display: 'block' }}>Password</label>
-                                            <div style={{ position: 'relative', marginTop: '10px' }}>
-                                                <input
-                                                    type={visibiltyOfPassword ? "text" : "password"}
-                                                    placeholder="Password"
-                                                    id="password"
-                                                    style={{ display: 'block', width: '100%' }}
-                                                />
-                                                <div
-                                                    onClick={showOrHidePassword}
-                                                    style={{
-                                                        position: 'absolute',
-                                                        top: '50%',
-                                                        right: '10px',
-                                                        transform: 'translateY(-50%)',
-                                                        cursor: 'pointer',
-                                                        color: '#888',
-                                                    }}
-                                                >
-                                                    {visibiltyOfPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
-                                                </div>
-                                            </div>
-                                            <p className='forget-password'>Forget Password</p>
-                                            <Button className="navbar-accountButton" sx={{
-                                                marginTop: '20px',
-                                                width: '100%',
-                                                backgroundColor: 'red',
-                                                color: 'white',
-                                                borderRadius: '13px'
-                                            }}>
-                                                Login
-                                            </Button>
-                                            <Button className="navbar-accountButton" sx={{
-                                                marginTop: '20px',
-                                                width: '100%',
-                                                backgroundColor: 'black',
-                                                color: 'white',
-                                                borderRadius: '13px'
-                                            }}>
-                                                Sign Up
-                                            </Button>
+                                    <Formik
+                                        initialValues={initalValues}
+                                        validationSchema={validationSchema}
+                                        onSubmit={handleSubmit}
+                                    >
+                                        {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
+                                            <Form onSubmit={handleSubmit}>
+                                                <Typography sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center' }}>
+                                                    <AccountCircleIcon sx={{ fontSize: '40px' }} />
+                                                </Typography>
+                                                <Typography sx={{ borderBottom: '1px solid', display: 'flex', justifyContent: 'center' }}>
+                                                    My Account
+                                                </Typography>
+                                                <div className='signUp-drawer'>
+                                                    <label htmlFor="email">E-Mail</label>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="E-Mail"
+                                                        id="email"
+                                                        name="email"
+                                                        value={values.email}
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        style={{ display: 'block', marginTop: '10px', marginBottom: '10px' }}
+                                                    />
+                                                    {touched.email && errors.email && (
+                                                        <div style={{ color: 'red' }}>{errors.email}</div>
+                                                    )}
 
-                                        </div>
-                                    </>
+                                                    <label htmlFor="password" style={{ display: 'block' }}>Password</label>
+                                                    <div style={{ position: 'relative', marginTop: '10px' }}>
+                                                        <input
+                                                            type={visibiltyOfPassword ? "text" : "password"}
+                                                            placeholder="Password"
+                                                            id="password"
+                                                            name="password"
+                                                            value={values.password}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            style={{ display: 'block', width: '100%' }}
+                                                        />
+                                                        <div
+                                                            onClick={showOrHidePassword}
+                                                            style={{
+                                                                position: 'absolute',
+                                                                top: '50%',
+                                                                right: '10px',
+                                                                transform: 'translateY(-50%)',
+                                                                cursor: 'pointer',
+                                                                color: '#888',
+                                                            }}
+                                                        >
+                                                            {visibiltyOfPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                                                        </div>
+                                                    </div>
+                                                    {touched.password && errors.password && (
+                                                        <div style={{ color: 'red' }}>{errors.password}</div>
+                                                    )}
+
+                                                    <p className='forget-password' onClick={() => navigate("/forget-password")}>Forget Password</p>
+                                                    <Button
+                                                        className="navbar-accountButton"
+                                                        sx={{
+                                                            marginTop: '20px',
+                                                            width: '100%',
+                                                            backgroundColor: 'red',
+                                                            color: 'white',
+                                                            borderRadius: '13px',
+                                                        }}
+                                                        type="submit"
+                                                    >
+                                                        Login
+                                                    </Button>
+                                                    <Button
+                                                        className="navbar-accountButton"
+                                                        sx={{
+                                                            marginTop: '20px',
+                                                            width: '100%',
+                                                            backgroundColor: 'black',
+                                                            color: 'white',
+                                                            borderRadius: '13px',
+                                                        }}
+                                                        onClick={() => navigate("/signup")}
+                                                    >
+                                                        Sign Up
+                                                    </Button>
+                                                </div>
+                                            </Form>
+                                        )}
+                                    </Formik>
                                 ) : (
                                     <Typography>Some other content when memberStatus is true</Typography>
                                 )}
-
-
-
                             </Box>
+
                         </Drawer>
                     </Box>
                 </Toolbar >
