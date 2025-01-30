@@ -3,11 +3,7 @@ import Index from './Pages/Index';
 
 function App() {
   return (
-    <div>
-
-      <Index />
-
-    </div>
+    <div></div>
   );
 }
 

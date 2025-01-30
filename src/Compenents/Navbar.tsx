@@ -21,6 +21,9 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
 import '../Css/Navbar.css';
+import { memberStatus } from '../MemberStatus/Member';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -121,7 +124,11 @@ const Navbar: React.FC = () => {
         setDrawerOpenForCart(!drawerOpenForCart);
     }
 
+    const [visibiltyOfPassword, setVisibiltyOfPassword] = useState(false);
 
+    const showOrHidePassword = () => {
+        setVisibiltyOfPassword(!visibiltyOfPassword);
+    }
 
 
     return (
@@ -248,10 +255,63 @@ const Navbar: React.FC = () => {
                             open={drawerOpenForFavorite}
                             onClose={toggleDrawerForFav}
                         >
-                            <Box sx={{ width: 250, padding: 2 }}>
-                                <Typography variant="h6" sx={{ marginBottom: 2, borderBottom: '1px solid' }}>
-                                    Later...
-                                </Typography>
+                            <Box sx={{ width: 300, padding: 2, marginTop: '50px' }}>
+                                {memberStatus === false ? (
+                                    <>
+                                        <Typography sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center' }}>
+                                            <AccountCircleIcon sx={{ fontSize: '40px' }} />
+                                        </Typography>
+                                        <Typography sx={{ borderBottom: '1px solid', display: 'flex', justifyContent: 'center' }}>
+                                            My Account
+                                        </Typography>
+                                        <div className='signUp-drawer'>
+                                            <label htmlFor="">E-Mail</label>
+                                            <input type="text" placeholder='E-Mail' style={{ display: 'block', marginTop: '10px', marginBottom: '10px' }} id='email' />
+                                            <label htmlFor="password" style={{ display: 'block' }}>Password</label>
+                                            <div style={{ position: 'relative', marginTop: '10px' }}>
+                                                <input
+                                                    type={visibiltyOfPassword ? "text" : "password"}
+                                                    placeholder="Password"
+                                                    id="password"
+                                                    style={{ display: 'block', width: '100%' }}
+                                                />
+                                                <div
+                                                    onClick={showOrHidePassword}
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: '50%',
+                                                        right: '10px',
+                                                        transform: 'translateY(-50%)',
+                                                        cursor: 'pointer',
+                                                        color: '#888',
+                                                    }}
+                                                >
+                                                    {visibiltyOfPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                                                </div>
+                                            </div>
+                                            <p className='forget-password'>Forget Password</p>
+                                            <Button className="navbar-accountButton" sx={{
+                                                marginTop: '20px',
+                                                width: '100%',
+                                                backgroundColor: 'red',
+                                                color: 'white',
+                                                borderRadius: '13px'
+                                            }}>
+                                                Login
+                                            </Button>
+                                            <Button className="navbar-accountButton" sx={{
+                                                marginTop: '20px',
+                                                width: '100%',
+                                                backgroundColor: 'black',
+                                                color: 'white',
+                                                borderRadius: '13px'
+                                            }}>
+                                                Sign Up
+                                            </Button>                                    </div>
+                                    </>
+                                ) : (
+                                    <Typography>Some other content when memberStatus is true</Typography>
+                                )}
 
                             </Box>
                         </Drawer>
@@ -282,17 +342,74 @@ const Navbar: React.FC = () => {
                             open={drawerOpenForAccount}
                             onClose={toggleDrawerForAccount}
                         >
-                            <Box sx={{ width: 250, padding: 2 }}>
-                                <Typography variant="h6" sx={{ marginBottom: 2, borderBottom: '1px solid' }}>
-                                    Later...
-                                </Typography>
+                            <Box sx={{ width: 300, padding: 2, marginTop: '50px' }}>
+                                {memberStatus === false ? (
+                                    <>
+                                        <Typography sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center' }}>
+                                            <AccountCircleIcon sx={{ fontSize: '40px' }} />
+                                        </Typography>
+                                        <Typography sx={{ borderBottom: '1px solid', display: 'flex', justifyContent: 'center' }}>
+                                            My Account
+                                        </Typography>
+                                        <div className='signUp-drawer'>
+                                            <label htmlFor="">E-Mail</label>
+                                            <input type="text" placeholder='E-Mail' style={{ display: 'block', marginTop: '10px', marginBottom: '10px' }} id='email' />
+                                            <label htmlFor="password" style={{ display: 'block' }}>Password</label>
+                                            <div style={{ position: 'relative', marginTop: '10px' }}>
+                                                <input
+                                                    type={visibiltyOfPassword ? "text" : "password"}
+                                                    placeholder="Password"
+                                                    id="password"
+                                                    style={{ display: 'block', width: '100%' }}
+                                                />
+                                                <div
+                                                    onClick={showOrHidePassword}
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: '50%',
+                                                        right: '10px',
+                                                        transform: 'translateY(-50%)',
+                                                        cursor: 'pointer',
+                                                        color: '#888',
+                                                    }}
+                                                >
+                                                    {visibiltyOfPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                                                </div>
+                                            </div>
+                                            <p className='forget-password'>Forget Password</p>
+                                            <Button className="navbar-accountButton" sx={{
+                                                marginTop: '20px',
+                                                width: '100%',
+                                                backgroundColor: 'red',
+                                                color: 'white',
+                                                borderRadius: '13px'
+                                            }}>
+                                                Login
+                                            </Button>
+                                            <Button className="navbar-accountButton" sx={{
+                                                marginTop: '20px',
+                                                width: '100%',
+                                                backgroundColor: 'black',
+                                                color: 'white',
+                                                borderRadius: '13px'
+                                            }}>
+                                                Sign Up
+                                            </Button>
+
+                                        </div>
+                                    </>
+                                ) : (
+                                    <Typography>Some other content when memberStatus is true</Typography>
+                                )}
+
+
 
                             </Box>
                         </Drawer>
                     </Box>
-                </Toolbar>
-            </AppBar>
-        </Box>
+                </Toolbar >
+            </AppBar >
+        </Box >
     );
 };
 

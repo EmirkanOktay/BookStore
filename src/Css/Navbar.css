@@ -1,3 +1,67 @@
+.signUp-drawer {
+    margin-top: 40px;
+    position: relative;
+}
+
+.signUp-drawer #email {
+    width: 100%;
+    height: 30px;
+    padding: 2px 3px;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 3px solid rgb(240, 240, 240);
+    background-color: transparent;
+    font-size: 16px;
+    color: #333;
+    box-shadow: #888;
+}
+
+.signUp-drawer #email:focus {
+    outline: none;
+    border: 2px solid red;
+}
+
+.signUp-drawer #password {
+    width: 100%;
+    height: 30px;
+    padding: 2px 3px;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 3px solid rgb(240, 240, 240);
+    background-color: transparent;
+    font-size: 16px;
+    color: #333;
+    box-shadow: #888;
+}
+
+.signUp-drawer #password:focus {
+    outline: none;
+    border: 2px solid red;
+}
+
+.show-password {
+    position: absolute;
+    top: 82%;
+    right: 1px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+}
+
+.forget-password {
+    text-align: right;
+    margin-top: 10px;
+    font-size: 15px;
+    color: rgb(55, 55, 56);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.forget-password:hover {
+    color: red;
+}
+
+
 @media (max-width : 900px) {
     .menu {
         display: none;
