@@ -7,6 +7,7 @@ import ScrollToTop from '../Compenents/ScrollToTop';
 import Banner from '../Compenents/Banner';
 import Section from '../Compenents/Section';
 import SectionSecond from '../Compenents/SectionSecond';
+import Footer from '../Compenents/Footer';
 
 
 function Index() {
@@ -20,6 +21,7 @@ function Index() {
             <Banner />
             <Section />
             <SectionSecond />
+            <Footer />
             <ScrollToTop />
         </div>
     )
