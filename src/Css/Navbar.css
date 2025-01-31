@@ -39,6 +39,25 @@
     border: 2px solid rgb(0, 0, 0);
 }
 
+
+#password2 {
+    width: 100%;
+    height: 30px;
+    padding: 2px 3px;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 3px solid rgb(240, 240, 240);
+    background-color: transparent;
+    font-size: 16px;
+    color: #333;
+    box-shadow: #888;
+}
+
+#password2:hover {
+    outline: none;
+    border: 2px solid rgb(0, 0, 0);
+}
+
 .show-password {
     position: absolute;
     top: 82%;

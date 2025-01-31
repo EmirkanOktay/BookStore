@@ -28,7 +28,7 @@ function ProductDetails() {
                     setLoading(false);
                 })
                 .catch(err => {
-                    setError('Error fetching book details');
+                    setError('Error fetching book details' + err);
                     setLoading(false);
                 });
         }

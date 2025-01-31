@@ -27,14 +27,18 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { Formik, Form } from "formik";
-import { validationSchema } from '../Yup/Yup';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../Redux/Store';
+import { validationSchemaForLogin } from '../Yup/Yup';
 
 export interface formValuesForLogin {
     email: string,
     password: string,
 }
+
+export const initalValues: formValuesForLogin = {
+    email: "",
+    password: ""
+}
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -105,6 +109,16 @@ export const menuItems = [
     'Self-help'
 ];
 
+
+export const handleSubmit = (values: formValuesForLogin) => {
+    if (values) {
+        toast.success("You are logged in");
+    }
+    else {
+        toast.error("Something went wrong");
+    }
+}
+
 const Navbar: React.FC = () => {
     const navigate = useNavigate();
 
@@ -114,7 +128,6 @@ const Navbar: React.FC = () => {
     const [drawerOpenForFavorite, setDrawerOpenForFavorite] = useState(false);
     const [drawerOpenForCart, setDrawerOpenForCart] = useState(false);
     const [drawerOpenForAccount, setDrawerOpenForAccount] = useState(false);
-    const [query, setQuery] = useState("");
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMenuAnchorEl(event.currentTarget);
@@ -142,15 +155,6 @@ const Navbar: React.FC = () => {
 
     const showOrHidePassword = () => {
         setVisibiltyOfPassword(!visibiltyOfPassword);
-    }
-
-    const initalValues: formValuesForLogin = {
-        email: "",
-        password: ""
-    }
-
-    const handleSubmit = (values: formValuesForLogin) => {
-        toast.success("You are logged in");
     }
 
     const [inputData, setInputData] = useState("");
@@ -300,58 +304,97 @@ const Navbar: React.FC = () => {
                             <Box sx={{ width: 300, padding: 2, marginTop: '50px' }}>
                                 {memberStatus === false ? (
                                     <>
-                                        <Typography sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center' }}>
-                                            <AccountCircleIcon sx={{ fontSize: '40px' }} />
-                                        </Typography>
-                                        <Typography sx={{ borderBottom: '1px solid', display: 'flex', justifyContent: 'center' }}>
-                                            My Account
-                                        </Typography>
-                                        <div className='signUp-drawer'>
-                                            <label htmlFor="">E-Mail</label>
-                                            <input type="text" placeholder='E-Mail' style={{ display: 'block', marginTop: '10px', marginBottom: '10px' }} id='email' />
-                                            <label htmlFor="password" style={{ display: 'block' }}>Password</label>
-                                            <div style={{ position: 'relative', marginTop: '10px' }}>
-                                                <input
-                                                    type={visibiltyOfPassword ? "text" : "password"}
-                                                    placeholder="Password"
-                                                    id="password"
-                                                    style={{ display: 'block', width: '100%' }}
-                                                />
-                                                <div
-                                                    onClick={showOrHidePassword}
-                                                    style={{
-                                                        position: 'absolute',
-                                                        top: '50%',
-                                                        right: '10px',
-                                                        transform: 'translateY(-50%)',
-                                                        cursor: 'pointer',
-                                                        color: '#888',
-                                                    }}
-                                                >
-                                                    {visibiltyOfPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
-                                                </div>
-                                            </div>
-                                            <p className='forget-password' onClick={() => navigate("/forget-password")}>Forget Password</p>
+                                        <Formik
+                                            initialValues={initalValues}
+                                            validationSchema={validationSchemaForLogin}
+                                            onSubmit={handleSubmit}
+                                        >
+                                            {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
+                                                <Form onSubmit={handleSubmit}>
+                                                    <Typography sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center' }}>
+                                                        <AccountCircleIcon sx={{ fontSize: '40px' }} />
+                                                    </Typography>
+                                                    <Typography sx={{ borderBottom: '1px solid', display: 'flex', justifyContent: 'center' }}>
+                                                        My Account
+                                                    </Typography>
+                                                    <div className='signUp-drawer'>
+                                                        <label htmlFor="email">E-Mail</label>
+                                                        <input
+                                                            type="text"
+                                                            placeholder='E-Mail'
+                                                            id="email"
+                                                            name="email"
+                                                            value={values.email}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            style={{ display: 'block', marginTop: '10px', marginBottom: '10px' }}
+                                                        />
+                                                        {touched.email && errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
 
-                                            <Button className="navbar-accountButton" sx={{
-                                                marginTop: '20px',
-                                                width: '100%',
-                                                backgroundColor: 'red',
-                                                color: 'white',
-                                                borderRadius: '13px'
-                                            }}>
-                                                Login
-                                            </Button>
-                                            <Button className="navbar-accountButton" sx={{
-                                                marginTop: '20px',
-                                                width: '100%',
-                                                backgroundColor: 'black',
-                                                color: 'white',
-                                                borderRadius: '13px'
-                                            }} onClick={() => navigate("/signup")}>
-                                                Sign Up
-                                            </Button>                                    </div>
+                                                        <label htmlFor="password" style={{ display: 'block' }}>Password</label>
+                                                        <div style={{ position: 'relative', marginTop: '10px' }}>
+                                                            <input
+                                                                type={visibiltyOfPassword ? "text" : "password"}
+                                                                placeholder="Password"
+                                                                id="password"
+                                                                name="password"
+                                                                value={values.password}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur}
+                                                                style={{ display: 'block', width: '100%' }}
+                                                            />
+                                                            <div
+                                                                onClick={showOrHidePassword}
+                                                                style={{
+                                                                    position: 'absolute',
+                                                                    top: '50%',
+                                                                    right: '10px',
+                                                                    transform: 'translateY(-50%)',
+                                                                    cursor: 'pointer',
+                                                                    color: '#888',
+                                                                }}
+                                                            >
+                                                                {visibiltyOfPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
+                                                            </div>
+                                                        </div>
+                                                        {touched.password && errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
+
+                                                        <p className='forget-password' onClick={() => navigate("/forget-password")}>
+                                                            Forget Password
+                                                        </p>
+
+                                                        <Button
+                                                            className="navbar-accountButton"
+                                                            sx={{
+                                                                marginTop: '20px',
+                                                                width: '100%',
+                                                                backgroundColor: 'red',
+                                                                color: 'white',
+                                                                borderRadius: '13px'
+                                                            }}
+                                                            type="submit"
+                                                        >
+                                                            Login
+                                                        </Button>
+                                                        <Button
+                                                            className="navbar-accountButton"
+                                                            sx={{
+                                                                marginTop: '20px',
+                                                                width: '100%',
+                                                                backgroundColor: 'black',
+                                                                color: 'white',
+                                                                borderRadius: '13px'
+                                                            }}
+                                                            onClick={() => navigate("/signup")}
+                                                        >
+                                                            Sign Up
+                                                        </Button>
+                                                    </div>
+                                                </Form>
+                                            )}
+                                        </Formik>
                                     </>
+
                                 ) : (
                                     <Typography>Some other content when memberStatus is true</Typography>
                                 )}
@@ -389,9 +432,8 @@ const Navbar: React.FC = () => {
                                 {memberStatus === false ? (
                                     <Formik
                                         initialValues={initalValues}
-                                        validationSchema={validationSchema}
-                                        onSubmit={handleSubmit}
-                                    >
+                                        validationSchema={validationSchemaForLogin}
+                                        onSubmit={handleSubmit}>
                                         {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
                                             <Form onSubmit={handleSubmit}>
                                                 <Typography sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center' }}>

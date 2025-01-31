@@ -3,8 +3,24 @@ import Footer from '../Compenents/Footer';
 import HeaderNav from '../Compenents/HeaderNav';
 import Navbar from '../Compenents/Navbar';
 import ScrollToTop from '../Compenents/ScrollToTop';
+import { Formik, Field, Form } from 'formik';
+import { validationSchemaForResetPassword } from '../Yup/Yup';
+import { toast } from 'react-toastify';
 
 function ForgetPassword() {
+
+    const initialValues = {
+        email: ""
+    };
+
+    const handleSubmit = (values: any) => {
+        if (values.email) {
+            toast.success("Password Reset Request Has Been Sent");
+        } else {
+            toast.error("Something went wrong");
+        }
+    };
+
     return (
         <div>
             <ScrollToTop />
@@ -20,30 +36,49 @@ function ForgetPassword() {
                         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
                         backgroundColor: "white"
                     }}>
-                        <Typography variant="h5" textAlign="center" fontWeight="bold" marginBottom={2}>
-                            Forget Password
-                        </Typography>
-                        <div className="signUp-drawer">
-                            <div className="input">
-                                <label htmlFor="email">E-Mail</label>
-                                <input style={{ marginTop: '15px' }} type="text" placeholder="E-Mail" id="email" className="input-field" />
-                            </div>
-                            <Button
-                                className="navbar-accountButton"
-                                sx={{
-                                    marginTop: "20px",
-                                    width: "100%",
-                                    backgroundColor: "black",
-                                    color: "white",
-                                    borderRadius: "13px",
-                                    padding: "10px",
-                                    fontSize: "16px",
-                                    "&:hover": { backgroundColor: "#333" }
-                                }}
-                            >
-                                Reset Password
-                            </Button>
-                        </div>
+                        <Formik
+                            initialValues={initialValues}
+                            validationSchema={validationSchemaForResetPassword}
+                            onSubmit={handleSubmit}
+                        >
+                            {({ handleSubmit, errors, touched }) => (
+                                <Form onSubmit={handleSubmit}>
+                                    <Typography variant="h5" textAlign="center" fontWeight="bold" marginBottom={2}>
+                                        Forget Password
+                                    </Typography>
+                                    <div className="signUp-drawer">
+                                        <div className="input">
+                                            <label htmlFor="email">E-Mail</label>
+                                            <Field
+                                                type="text"
+                                                placeholder="E-Mail"
+                                                id="email"
+                                                name="email"
+                                                className="input-field"
+                                            />
+                                            {touched.email && errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
+                                        </div>
+
+                                        <Button
+                                            className="navbar-accountButton"
+                                            sx={{
+                                                marginTop: "20px",
+                                                width: "100%",
+                                                backgroundColor: "black",
+                                                color: "white",
+                                                borderRadius: "13px",
+                                                padding: "10px",
+                                                fontSize: "16px",
+                                                "&:hover": { backgroundColor: "#333" }
+                                            }}
+                                            type="submit"
+                                        >
+                                            Reset Password
+                                        </Button>
+                                    </div>
+                                </Form>
+                            )}
+                        </Formik>
                     </Box>
                 </Container>
             </Box>

@@ -6,7 +6,10 @@ import Crime from '../images/crime-icon.svg'
 import Fantsay from '../images/fantasy-icon.svg'
 import Exam from '../images/exams-icon.svg'
 import '../Css/SectionTop.css'
+import { useNavigate } from 'react-router-dom';
 function SectionTop() {
+    const navigate = useNavigate();
+
     return (
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>
             <div className='box'>
@@ -14,7 +17,7 @@ function SectionTop() {
                 <Typography className='text'>Sci-Fi</Typography>
 
             </div>
-            <div className='box'>
+            <div className='box' onClick={() => { navigate("/search/:harrypotter") }}>
                 <img src={HarryPotter} alt="" />
                 <Typography className='text' >Harry Potter</Typography>
             </div>
