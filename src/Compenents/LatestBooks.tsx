@@ -10,6 +10,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { styled } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
 import '../Css/LatestBooks.css';
+import { useNavigate } from "react-router-dom";
 
 export const decidePrice = () => {
     let price = Math.floor(Math.random() * 101);
@@ -17,7 +18,7 @@ export const decidePrice = () => {
     if (price < 10) {
         price = Math.floor(Math.random() * 101);
     }
-    return price;
+    return price.toFixed(2);
 }
 
 export const StyledButton = styled(Button)(({ theme }) => ({
@@ -38,6 +39,7 @@ export const StyledButton = styled(Button)(({ theme }) => ({
 function LatestBooks() {
 
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     const { load, error, books } = useSelector((state: RootState) => state.latestBook);
 
@@ -130,7 +132,8 @@ function LatestBooks() {
                                         src={book.volumeInfo.imageLinks.smallThumbnail}
                                         alt={book.volumeInfo.title}
                                         height={200}
-                                        style={{ marginBottom: '10px', borderRadius: '4px' }}
+                                        style={{ marginBottom: '10px', borderRadius: '4px', cursor: 'pointer' }}
+                                        onClick={() => { navigate(`/product/${book.id}`); }}
                                     />
                                     <Typography variant="h6" sx={{ marginBottom: '10px', fontWeight: '600', color: '#333' }}>
                                         {book.volumeInfo.title}

@@ -25,15 +25,15 @@ import { memberStatus } from '../MemberStatus/Member';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Formik, Form } from "formik";
 import { validationSchema } from '../Yup/Yup';
-
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../Redux/Store';
 
 export interface formValuesForLogin {
     email: string,
     password: string,
-
 }
 
 const Search = styled('div')(({ theme }) => ({
@@ -92,28 +92,29 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
         padding: theme.spacing(0.5),
     },
 }));
+export const menuItems = [
+    'Fiction',
+    'Non-fiction',
+    'Mystery',
+    'Romance',
+    'Science Fiction',
+    'Fantasy',
+    'Historical Fiction',
+    'Thriller',
+    'Biography',
+    'Self-help'
+];
 
 const Navbar: React.FC = () => {
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [menuAnchorEl, setMenuAnchorEl] = React.useState<null | HTMLElement>(null);
-    const menuItems = [
-        'Fiction',
-        'Non-fiction',
-        'Mystery',
-        'Romance',
-        'Science Fiction',
-        'Fantasy',
-        'Historical Fiction',
-        'Thriller',
-        'Biography',
-        'Self-help'
-    ];
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [drawerOpenForFavorite, setDrawerOpenForFavorite] = useState(false);
     const [drawerOpenForCart, setDrawerOpenForCart] = useState(false);
     const [drawerOpenForAccount, setDrawerOpenForAccount] = useState(false);
+    const [query, setQuery] = useState("");
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMenuAnchorEl(event.currentTarget);
@@ -151,6 +152,22 @@ const Navbar: React.FC = () => {
     const handleSubmit = (values: formValuesForLogin) => {
         toast.success("You are logged in");
     }
+
+    const [inputData, setInputData] = useState("");
+    const searchProduct = (event: any) => {
+        const trimmedQuery = inputData.trim();
+
+        if (event.key === "Enter") {
+            if (trimmedQuery === "") {
+                toast.error("Empty Input Area!");
+                return;
+            }
+
+            navigate(`/search/${trimmedQuery}`);
+
+            setInputData("");
+        }
+    };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -244,6 +261,9 @@ const Navbar: React.FC = () => {
                         <StyledInputBase
                             placeholder="Search..."
                             inputProps={{ 'aria-label': 'search' }}
+                            value={inputData}
+                            onChange={(e) => setInputData(e.target.value)}
+                            onKeyPress={searchProduct}
                         />
                     </Search>
 

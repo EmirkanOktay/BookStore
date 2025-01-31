@@ -9,6 +9,8 @@ import Refund from '../Pages/Refund';
 import TermsofUse from '../Pages/TermsofUse';
 import AboutUs from '../Pages/AboutUs';
 import ForgetPassword from '../Pages/ForgetPassword';
+import SearchPage from '../Pages/SearchPage';
+import ProductDetails from '../Pages/ProductDetails';
 export default function Router() {
     return (
         <Routes>
@@ -21,6 +23,8 @@ export default function Router() {
             <Route path='terms-of-use' element={<TermsofUse />} />
             <Route path='about-us' element={<AboutUs />} />
             <Route path='forget-password' element={<ForgetPassword />} />
+            <Route path="/search/:query" element={<SearchPage />} />
+            <Route path="/product/:query" element={<ProductDetails />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     )

@@ -9,10 +9,12 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Skeleton from '@mui/material/Skeleton';
 import { decidePrice } from "./LatestBooks";
 import { StyledButton } from "./LatestBooks";
+import { useNavigate } from "react-router-dom";
 
 
 function TopSeller() {
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     const { load, error, books1984, booksWarAndPeace, booksHarryPotter, booksCrimeAndPunishment } = useSelector((state: RootState) => state.topSellBook);
 
@@ -124,7 +126,8 @@ function TopSeller() {
                                         src={book.volumeInfo.imageLinks.smallThumbnail}
                                         alt={book.volumeInfo.title}
                                         height={200}
-                                        style={{ marginBottom: '10px', borderRadius: '4px' }}
+                                        style={{ marginBottom: '10px', borderRadius: '4px', cursor: 'pointer' }}
+                                        onClick={() => { navigate(`/product/${book.id}`); }}
                                     />
                                     <Typography variant="h6" sx={{ marginBottom: '10px', fontWeight: '600', color: '#333' }}>
                                         {book.volumeInfo.title}
