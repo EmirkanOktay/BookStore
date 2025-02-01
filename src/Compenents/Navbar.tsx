@@ -21,13 +21,14 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
 import '../Css/Navbar.css';
-import { memberStatus } from '../MemberStatus/Member';
+import { memberStatus } from '../memberStatus/memberStatus';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
 import { Formik, Form } from "formik";
 import { validationSchemaForLogin } from '../Yup/Yup';
+import Cart from './Cart';
 
 export interface formValuesForLogin {
     email: string,
@@ -98,7 +99,6 @@ const StyledIconButton = styled(IconButton)(({ theme }) => ({
 }));
 export const menuItems = [
     'Fiction',
-    'Non-fiction',
     'Mystery',
     'Romance',
     'Science Fiction',
@@ -239,7 +239,10 @@ const Navbar: React.FC = () => {
                             {menuItems.map((item, index) => (
                                 <MenuItem
                                     key={index}
-                                    onClick={toggleDrawer}
+                                    onClick={() => {
+                                        navigate(`/genre/${item}`);
+                                        toggleDrawer();
+                                    }}
                                     sx={{
                                         padding: '10px 16px',
                                         borderRadius: '8px',
@@ -251,8 +254,9 @@ const Navbar: React.FC = () => {
                                         },
                                     }}
                                 >
-                                    {item}
+                                    <div>{item}</div>
                                 </MenuItem>
+
                             ))}
                         </Box>
                     </Drawer>
@@ -284,7 +288,7 @@ const Navbar: React.FC = () => {
                             onClose={handleMenuClose}
                         >
                             {menuItems.map((item) => (
-                                <MenuItem key={item} onClick={handleMenuClose}>
+                                <MenuItem key={item} onClick={() => navigate(`/genre/${item}`)}>
                                     {item}
                                 </MenuItem>
                             ))}
@@ -414,7 +418,7 @@ const Navbar: React.FC = () => {
                         >
                             <Box sx={{ width: 250, padding: 2 }}>
                                 <Typography variant="h6" sx={{ marginBottom: 2, borderBottom: '1px solid' }}>
-                                    Later...
+                                    <Cart />
                                 </Typography>
 
                             </Box>

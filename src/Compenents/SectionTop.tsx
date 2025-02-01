@@ -13,7 +13,7 @@ function SectionTop() {
     return (
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '10px' }}>
             <div className='box'>
-                <img src={SciFi} alt="" />
+                <img src={SciFi} alt="" onClick={() => navigate("/search/Sci-Fi")} />
                 <Typography className='text'>Sci-Fi</Typography>
 
             </div>
@@ -22,17 +22,17 @@ function SectionTop() {
                 <Typography className='text' >Harry Potter</Typography>
             </div>
             <div className='box'>
-                <img src={Crime} alt="" />
+                <img src={Crime} alt="" onClick={() => navigate("/search/Crime")} />
                 <Typography className='text' >Crime</Typography>
 
             </div>
             <div className='box'>
-                <img src={Fantsay} alt="" />
+                <img src={Fantsay} alt="" onClick={() => navigate("/search/Fantsay")} />
                 <Typography className='text' >Fantasy</Typography>
 
             </div>
             <div className='box'>
-                <img src={Exam} alt="" />
+                <img src={Exam} alt="" onClick={() => navigate("/search/Exam")} />
                 <Typography className='text' >Exams</Typography>
 
             </div>

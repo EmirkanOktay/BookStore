@@ -12,7 +12,7 @@ export const fetchBooks = createAsyncThunk(
     }
 );
 
-interface SearchState {
+export interface SearchState {
     query: string;
     books: any[];
     loading: boolean;

@@ -24,6 +24,7 @@ export default function Router() {
             <Route path='about-us' element={<AboutUs />} />
             <Route path='forget-password' element={<ForgetPassword />} />
             <Route path="/search/:query" element={<SearchPage />} />
+            <Route path="/genre/:genre" element={<SearchPage />} />
             <Route path="/product/:query" element={<ProductDetails />} />
             <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,11 +1,12 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import '../Css/HeaderNav.css';
+import { useNavigate } from 'react-router-dom';
+
+export const items = ["Story", "Fairy Tale", "Fiction", "History", "Crime", "Suggestions"];
 
 function HeaderNav() {
-
-    const items = ["Story", "Fairy Tale", "Fiction", "History", "Crime", "Prepare Exams", "Toys", "Suggestions"];
-
+    const navigate = useNavigate();
     return (
         <Box
             sx={{
@@ -22,7 +23,7 @@ function HeaderNav() {
                 }}
             >
                 {items.map((item, index) => (
-                    <p className="item" key={index}>{item}</p>
+                    <p className="item" onClick={() => navigate(`/genre/${item}`)} key={index}>{item}</p>
                 ))}
             </Typography>
         </Box>

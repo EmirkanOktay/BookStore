@@ -10,6 +10,7 @@ import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import paymentImages from '../images/paymentImages.webp';
 import '../Css/Footer.css';
 import { useNavigate } from "react-router-dom";
+import { items } from "./HeaderNav";
 
 function Footer() {
     let date = new Date();
@@ -25,12 +26,9 @@ function Footer() {
                         <Grid item xs={12} sm={12} md={12} lg={3} className="footer-gird-container">
                             <h3 className="footer-head">Categories</h3>
                             <ul className="footer-item-ul">
-                                <li className="footer-item-li">Fiction</li>
-                                <li className="footer-item-li">Mystery</li>
-                                <li className="footer-item-li">History</li>
-                                <li className="footer-item-li">Fairy Tale</li>
-                                <li className="footer-item-li">Toys</li>
-                                <li className="footer-item-li">Prepare Exams</li>
+                                {items.map((item, index) => (
+                                    <li className="footer-item-li" key={index} onClick={() => navigate(`/genre/${item}`)}>{item}</li>
+                                ))}
                             </ul>
                         </Grid>
                         <Grid item xs={12} sm={12} md={6} lg={3} className="footer-gird-container">

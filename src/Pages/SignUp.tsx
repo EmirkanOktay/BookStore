@@ -2,7 +2,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import Navbar from "../Compenents/Navbar";
 import HeaderNav from "../Compenents/HeaderNav";
 import Footer from "../Compenents/Footer";
-import { memberStatus } from "../MemberStatus/Member";
+import { memberStatus } from "../memberStatus/memberStatus";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
@@ -12,14 +12,20 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Form, Formik, Field } from "formik";
 import { validationSchemaForSignUp } from "../Yup/Yup";
+import { createUserWithEmailAndPassword, getAuth, } from "firebase/auth";
+import { db } from "../Firebase/FirebaseInital";
+import { app } from "../Firebase/FirebaseInital";
+import { doc, setDoc } from "firebase/firestore";
+
+const auth = getAuth(app);
 
 function SignUp() {
     interface formsForSignUp {
-        name: string,
-        lastName: string,
-        email: string,
-        password: string,
-        rePassword: string
+        name: string;
+        lastName: string;
+        email: string;
+        password: string;
+        rePassword: string;
     }
 
     const initalValues: formsForSignUp = {
@@ -27,17 +33,34 @@ function SignUp() {
         lastName: "",
         email: "",
         password: "",
-        rePassword: ""
-    }
+        rePassword: "",
+    };
 
-    const handleSubmit = (values: formsForSignUp) => {
-        if (values) {
-            toast.success("Your Account Has Been Created");
+    const handleSubmit = async (values: formsForSignUp) => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                values.email,
+                values.password
+            );
+
+            const user = userCredential.user;
+
+            if (user) {
+                await setDoc(doc(db, "users", user.uid), {
+                    name: values.name,
+                    lastName: values.lastName,
+                    email: values.email,
+                });
+
+                toast.success("Your Account Has Been Created");
+            }
+            navigate("/");
+
+        } catch (error: any) {
+            toast.error("Error creating account: " + error.message);
         }
-        else {
-            toast.error("Something went wrong");
-        }
-    }
+    };
 
     const [visibiltyOfPassword, setVisibiltyOfPassword] = useState(false);
     const [visibiltyOfPassword2, setVisibiltyOfPassword2] = useState(false);
@@ -57,7 +80,7 @@ function SignUp() {
             <ScrollToTop />
             <Navbar />
             <HeaderNav />
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "90vh", marginBottom: '30px' }}>
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "90vh", marginBottom: "30px" }}>
                 <Container sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Box sx={{
                         width: 400,
@@ -79,7 +102,7 @@ function SignUp() {
                                             Sign Up
                                         </Typography>
                                         <div className="signUp-drawer">
-                                            <div className="input ">
+                                            <div className="input">
                                                 <label htmlFor="name-signup">Name</label>
                                                 <Field
                                                     type="text"
@@ -88,9 +111,9 @@ function SignUp() {
                                                     name="name"
                                                     className="input-field"
                                                 />
-                                                {touched.name && errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
+                                                {touched.name && errors.name && <div style={{ color: "red" }}>{errors.name}</div>}
                                             </div>
-                                            <div className="input ">
+                                            <div className="input">
                                                 <label htmlFor="lastNameSignUp">Last Name</label>
                                                 <Field
                                                     type="text"
@@ -99,9 +122,9 @@ function SignUp() {
                                                     name="lastName"
                                                     className="input-field"
                                                 />
-                                                {touched.lastName && errors.lastName && <div style={{ color: 'red' }}>{errors.lastName}</div>}
+                                                {touched.lastName && errors.lastName && <div style={{ color: "red" }}>{errors.lastName}</div>}
                                             </div>
-                                            <div className="input ">
+                                            <div className="input">
                                                 <label htmlFor="email">E-Mail</label>
                                                 <Field
                                                     type="text"
@@ -110,9 +133,9 @@ function SignUp() {
                                                     name="email"
                                                     className="input-field"
                                                 />
-                                                {touched.email && errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
+                                                {touched.email && errors.email && <div style={{ color: "red" }}>{errors.email}</div>}
                                             </div>
-                                            <div className="input ">
+                                            <div className="input">
                                                 <label htmlFor="password">Password</label>
                                                 <div style={{ position: "relative", marginBottom: "15px" }}>
                                                     <Field
@@ -136,9 +159,9 @@ function SignUp() {
                                                         {visibiltyOfPassword ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
                                                     </div>
                                                 </div>
-                                                {touched.password && errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
+                                                {touched.password && errors.password && <div style={{ color: "red" }}>{errors.password}</div>}
                                             </div>
-                                            <div className="input ">
+                                            <div className="input">
                                                 <label htmlFor="rePassword">Confirm Password</label>
                                                 <div style={{ position: "relative", marginBottom: "15px" }}>
                                                     <Field
@@ -162,7 +185,7 @@ function SignUp() {
                                                         {visibiltyOfPassword2 ? <RemoveRedEyeIcon /> : <VisibilityOffIcon />}
                                                     </div>
                                                 </div>
-                                                {touched.rePassword && errors.rePassword && <div style={{ color: 'red' }}>{errors.rePassword}</div>}
+                                                {touched.rePassword && errors.rePassword && <div style={{ color: "red" }}>{errors.rePassword}</div>}
                                             </div>
 
                                             <p className="forget-password" onClick={() => navigate("/login")}>Already have an account?</p>
@@ -177,7 +200,7 @@ function SignUp() {
                                                     borderRadius: "13px",
                                                     padding: "10px",
                                                     fontSize: "16px",
-                                                    "&:hover": { backgroundColor: "#333" }
+                                                    "&:hover": { backgroundColor: "#333" },
                                                 }}
                                                 type="submit"
                                             >
