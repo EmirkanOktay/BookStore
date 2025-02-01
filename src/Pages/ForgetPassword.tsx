@@ -6,6 +6,9 @@ import ScrollToTop from '../Compenents/ScrollToTop';
 import { Formik, Field, Form } from 'formik';
 import { validationSchemaForResetPassword } from '../Yup/Yup';
 import { toast } from 'react-toastify';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+
+const auth = getAuth();
 
 function ForgetPassword() {
 
@@ -13,11 +16,12 @@ function ForgetPassword() {
         email: ""
     };
 
-    const handleSubmit = (values: any) => {
-        if (values.email) {
-            toast.success("Password Reset Request Has Been Sent");
-        } else {
-            toast.error("Something went wrong");
+    const handleSubmit = async (values: { email: string }) => {
+        try {
+            await sendPasswordResetEmail(auth, values.email);
+            toast.success("Password reset email sent! Check your inbox.");
+        } catch (error: any) {
+            toast.error("Error: " + error.message);
         }
     };
 
@@ -50,7 +54,7 @@ function ForgetPassword() {
                                         <div className="input">
                                             <label htmlFor="email">E-Mail</label>
                                             <Field
-                                                type="text"
+                                                type="email"
                                                 placeholder="E-Mail"
                                                 id="email"
                                                 name="email"

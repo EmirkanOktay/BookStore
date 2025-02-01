@@ -21,7 +21,6 @@ import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
 import '../Css/Navbar.css';
-import { memberStatus } from '../memberStatus/memberStatus';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
@@ -31,7 +30,7 @@ import { validationSchemaForLogin } from '../Yup/Yup';
 import Cart from './Cart';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase/FirebaseInital";
-
+import { userMemberStatus } from '../Redux/UserStatusSlicer';
 
 export interface formValuesForLogin {
     email: string,
@@ -112,8 +111,10 @@ export const menuItems = [
     'Self-help'
 ];
 
-
-export const handleSubmit = async (values: formValuesForLogin) => {
+export const handleSubmit = async (
+    values: formValuesForLogin,
+    setMemberStatus: (status: boolean) => void // ✅ Parametre olarak al
+) => {
     try {
         const userCredential = await signInWithEmailAndPassword(
             auth,
@@ -122,14 +123,19 @@ export const handleSubmit = async (values: formValuesForLogin) => {
         );
         const user = userCredential.user;
         if (user) {
-            toast.success("Succesfuly Login")
+            toast.success("Successfully Logged In");
+            setMemberStatus(true); // ✅ Burada parametre olarak aldığımız fonksiyonu kullanıyoruz.
         }
     } catch (error: any) {
-        toast.error("Error creating account: " + error.message);
+        toast.error("Error logging in: " + error.message);
     }
-}
+};
+
 
 const Navbar: React.FC = () => {
+
+    const { memberStatus, setMemberStatus } = userMemberStatus();
+
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -318,13 +324,12 @@ const Navbar: React.FC = () => {
                             onClose={toggleDrawerForFav}
                         >
                             <Box sx={{ width: 300, padding: 2, marginTop: '50px' }}>
-                                {memberStatus === false ? (
+                                {memberStatus == false ? (
                                     <>
                                         <Formik
                                             initialValues={initalValues}
                                             validationSchema={validationSchemaForLogin}
-                                            onSubmit={handleSubmit}
-                                        >
+                                            onSubmit={(values) => handleSubmit(values, setMemberStatus)}>
                                             {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
                                                 <Form onSubmit={handleSubmit}>
                                                     <Typography sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center' }}>
@@ -449,7 +454,7 @@ const Navbar: React.FC = () => {
                                     <Formik
                                         initialValues={initalValues}
                                         validationSchema={validationSchemaForLogin}
-                                        onSubmit={handleSubmit}>
+                                        onSubmit={(values) => handleSubmit(values, setMemberStatus)}>
                                         {({ values, handleChange, handleBlur, handleSubmit, errors, touched }) => (
                                             <Form onSubmit={handleSubmit}>
                                                 <Typography sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center' }}>

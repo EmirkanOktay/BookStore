@@ -1,12 +1,10 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-// State'i ve fonksiyonları tanımlayalım
 interface MemberContextType {
     memberStatus: boolean;
     setMemberStatus: (status: boolean) => void;
 }
 
-// children tipini ReactNode olarak belirtiyoruz
 interface MemberProviderProps {
     children: ReactNode;
 }
@@ -23,7 +21,7 @@ export const MemberProvider: React.FC<MemberProviderProps> = ({ children }) => {
     );
 };
 
-export const useMemberStatus = () => {
+export const userMemberStatus = () => {
     const context = useContext(MemberContext);
     if (!context) {
         throw new Error("useMemberStatus must be used within a MemberProvider");

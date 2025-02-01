@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMemberStatus } from "../Redux/UserStatusSlicer";
+import { userMemberStatus } from "../Redux/UserStatusSlicer";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 
 function Login() {
     const [visibilityOfPassword, setVisibilityOfPassword] = useState(false);
-    const { memberStatus, setMemberStatus } = useMemberStatus();
+    const { memberStatus, setMemberStatus } = userMemberStatus();
 
     const showOrHidePassword = () => {
         setVisibilityOfPassword(!visibilityOfPassword);
@@ -72,6 +72,8 @@ function Login() {
                                             </div>
                                             {touched.password && errors.password && <div style={{ color: "red" }}>{errors.password}</div>}
                                         </div>
+                                        <p className="forget-password" onClick={() => navigate("/signup")}>Dont have an account?</p>
+                                        <p className="forget-password" onClick={() => navigate("/forget-password")}>Forget your password?</p>
 
                                         <Button className="navbar-accountButton" sx={{ marginTop: "20px", width: "100%", backgroundColor: "black", color: "white", borderRadius: "13px", padding: "10px", fontSize: "16px", "&:hover": { backgroundColor: "#333" } }} type="submit">
                                             Login
