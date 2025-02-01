@@ -12,6 +12,7 @@ import { Formik, Field, Form } from "formik";
 import { validationSchemaForLogin } from "../Yup/Yup";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { toast } from "react-toastify";
 
 function Login() {
     const [visibilityOfPassword, setVisibilityOfPassword] = useState(false);
@@ -23,7 +24,7 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const handleLogin = async (values: { email: string; password: string }) => {
+    const handleLogin = async (values: any) => {
         try {
             const userCredential = await signInWithEmailAndPassword(
                 auth,
@@ -33,10 +34,11 @@ function Login() {
             const user = userCredential.user;
             if (user) {
                 setMemberStatus(true);
+                toast.success("Succesfuly Login")
                 navigate("/");
             }
         } catch (error: any) {
-            console.error("Login Error: ", error);
+            toast.error("Error creating account: " + error.message);
         }
     };
 

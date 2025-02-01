@@ -29,6 +29,9 @@ import { toast } from "react-toastify";
 import { Formik, Form } from "formik";
 import { validationSchemaForLogin } from '../Yup/Yup';
 import Cart from './Cart';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase/FirebaseInital";
+
 
 export interface formValuesForLogin {
     email: string,
@@ -110,12 +113,19 @@ export const menuItems = [
 ];
 
 
-export const handleSubmit = (values: formValuesForLogin) => {
-    if (values) {
-        toast.success("You are logged in");
-    }
-    else {
-        toast.error("Something went wrong");
+export const handleSubmit = async (values: formValuesForLogin) => {
+    try {
+        const userCredential = await signInWithEmailAndPassword(
+            auth,
+            values.email,
+            values.password
+        );
+        const user = userCredential.user;
+        if (user) {
+            toast.success("Succesfuly Login")
+        }
+    } catch (error: any) {
+        toast.error("Error creating account: " + error.message);
     }
 }
 
@@ -256,8 +266,10 @@ const Navbar: React.FC = () => {
                                 >
                                     <div>{item}</div>
                                 </MenuItem>
-
                             ))}
+                            <Typography variant="h6" sx={{ marginBottom: 2, fontWeight: 'bold', borderTop: '1px solid' }} >
+                                <div onClick={() => navigate("/")}>BookStore</div>
+                            </Typography>
                         </Box>
                     </Drawer>
 
