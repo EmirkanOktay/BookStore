@@ -11,6 +11,7 @@ import { styled } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
 import '../Css/LatestBooks.css';
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../Redux/CartSlicer";
 
 export const decidePrice = () => {
     let price = Math.floor(Math.random() * 101);
@@ -37,7 +38,7 @@ export const StyledButton = styled(Button)(({ theme }) => ({
 
 
 function LatestBooks() {
-
+    const { addToCart } = useCart();
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
@@ -149,7 +150,7 @@ function LatestBooks() {
                                     </Typography>
 
                                     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                                        <StyledButton variant="contained" startIcon={<AddShoppingCartIcon />}>
+                                        <StyledButton variant="contained" startIcon={<AddShoppingCartIcon />} onClick={() => addToCart(book)}>
                                             Add To Cart
                                         </StyledButton>
                                     </Box>

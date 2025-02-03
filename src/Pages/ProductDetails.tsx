@@ -8,8 +8,13 @@ import { Box, Container, Grid, Skeleton, Typography } from '@mui/material';
 import { decidePrice, StyledButton } from '../Compenents/LatestBooks';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useFavorites } from '../Redux/FavoritesSlicer'
+import { useCart } from '../Redux/CartSlicer';
 
 function ProductDetails() {
+    const { addToFavorites } = useFavorites();
+    const { addToCart } = useCart();
+
     const stripHtml = (input: string) => {
         const doc = new DOMParser().parseFromString(input, 'text/html');
         return doc.body.textContent || "";
@@ -109,12 +114,17 @@ function ProductDetails() {
                                         {`${decidePrice()}$`}
                                     </Typography>
                                     <div style={{ display: 'flex' }}>
-                                        <StyledButton style={{ marginRight: '50px' }} variant="contained" startIcon={<AddShoppingCartIcon />}>
-                                            Add To Cart
-                                        </StyledButton>
-                                        <StyledButton variant="contained" startIcon={<FavoriteIcon />}>
-                                            Add To Wishlist
-                                        </StyledButton>
+                                        <div>
+                                            <StyledButton style={{ marginRight: '50px' }} variant="contained" startIcon={<AddShoppingCartIcon />} onClick={() => addToCart(book)}>
+                                                Add To Cart
+                                            </StyledButton>
+                                            <div onClick={() => addToFavorites(book)}>
+                                                <StyledButton variant="contained" startIcon={<FavoriteIcon />}>
+                                                    Add To Wishlist
+                                                </StyledButton>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </Grid>
                             </Grid>

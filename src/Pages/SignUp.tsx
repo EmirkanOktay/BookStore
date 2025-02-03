@@ -2,7 +2,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import Navbar from "../Compenents/Navbar";
 import HeaderNav from "../Compenents/HeaderNav";
 import Footer from "../Compenents/Footer";
-import { memberStatus } from "../memberStatus/memberStatus";
+import { memberStatus } from "../Pages/memberStatus/memberStatus";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";

@@ -16,7 +16,7 @@ import UserFavorite from '../Pages/UserFavorites'
 import PrivateRoute from './PrivateRouter';
 import MyAccountInfo from '../Pages/UserAccountInfo';
 import UserOrders from '../Pages/UserOrders';
-import UserLocation from '../Pages/userLocation';
+import UserLocation from '../Pages/UserLocation';
 import UserMessages from '../Pages/userMessages';
 
 

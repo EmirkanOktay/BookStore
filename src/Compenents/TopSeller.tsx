@@ -10,12 +10,12 @@ import Skeleton from '@mui/material/Skeleton';
 import { decidePrice } from "./LatestBooks";
 import { StyledButton } from "./LatestBooks";
 import { useNavigate } from "react-router-dom";
-
+import { useCart } from "../Redux/CartSlicer";
 
 function TopSeller() {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-
+    const { addToCart } = useCart();
     const { load, error, books1984, booksWarAndPeace, booksHarryPotter, booksCrimeAndPunishment } = useSelector((state: RootState) => state.topSellBook);
 
     useEffect(() => {
@@ -143,7 +143,7 @@ function TopSeller() {
                                     </Typography>
 
                                     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                                        <StyledButton variant="contained" startIcon={<AddShoppingCartIcon />}>
+                                        <StyledButton variant="contained" startIcon={<AddShoppingCartIcon />} onClick={() => addToCart(book)}>
                                             Add To Cart
                                         </StyledButton>
                                     </Box>

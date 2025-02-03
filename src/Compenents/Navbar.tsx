@@ -31,6 +31,8 @@ import Cart from './Cart';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase/FirebaseInital";
 import { userMemberStatus } from '../Redux/UserStatusSlicer';
+import { useFavorites } from '../Redux/FavoritesSlicer';
+import { useCart } from '../Redux/CartSlicer';
 
 export interface formValuesForLogin {
     email: string,
@@ -41,7 +43,6 @@ export const initalValues: formValuesForLogin = {
     email: "",
     password: ""
 }
-
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -133,7 +134,8 @@ export const handleSubmit = async (
 
 
 const Navbar: React.FC = () => {
-
+    const { countProductsFavorite, favorites } = useFavorites();
+    const { cart, countProductsCart, didBuy, removeFromCart, addToCart } = useCart();
     const { memberStatus, setMemberStatus } = userMemberStatus();
 
     const navigate = useNavigate();
@@ -320,7 +322,7 @@ const Navbar: React.FC = () => {
                                 toggleDrawerForFav();
                             }
                         }}>
-                            <Badge badgeContent={2} color="error">
+                            <Badge badgeContent={countProductsFavorite(favorites)} color="error">
                                 <FavoriteIcon />
                             </Badge>
                         </StyledIconButton>
@@ -431,7 +433,7 @@ const Navbar: React.FC = () => {
                         </Drawer>
 
                         <StyledIconButton color="inherit" className='icons' onClick={toggleDrawerForCart}>
-                            <Badge badgeContent={5} color="error">
+                            <Badge badgeContent={countProductsCart(cart)} color="error">
                                 <ShoppingCartIcon />
                             </Badge>
                         </StyledIconButton>

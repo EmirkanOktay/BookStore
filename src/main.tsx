@@ -6,6 +6,8 @@ import { Provider as ReduxProvider } from 'react-redux';
 import { BrowserRouter } from "react-router-dom";
 import Router from './Router/Router';
 import { MemberProvider } from './Redux/UserStatusSlicer';
+import { FavoritesProvider } from './Redux/FavoritesSlicer';
+import { CartProvider } from './Redux/CartSlicer';
 
 const container = document.getElementById('root');
 
@@ -16,10 +18,15 @@ if (container) {
     <BrowserRouter>
       <ReduxProvider store={store}>
         <MemberProvider>
-          <App />
-          <Router />
+          <CartProvider>
+            <FavoritesProvider>
+              <App />
+              <Router />
+            </FavoritesProvider>
+          </CartProvider>
         </MemberProvider>
       </ReduxProvider>
+
     </BrowserRouter>
   );
 } else {

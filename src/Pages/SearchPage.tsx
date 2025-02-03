@@ -12,8 +12,10 @@ import { StyledButton } from "../Compenents/LatestBooks";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { decidePrice } from "../Compenents/LatestBooks";
 import { fetcBookshWithType } from "../Redux/TypeOfBooks";
+import { useCart } from "../Redux/CartSlicer";
 
 const SearchPage = () => {
+    const { addToCart } = useCart();
     const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
     const { query, genre } = useParams();
@@ -136,7 +138,7 @@ const SearchPage = () => {
 
                                                 <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
 
-                                                    <StyledButton variant="contained" startIcon={<AddShoppingCartIcon />}>
+                                                    <StyledButton variant="contained" startIcon={<AddShoppingCartIcon />} onClick={() => addToCart(book)} >
                                                         Add To Cart
                                                     </StyledButton>
 
