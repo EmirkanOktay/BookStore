@@ -13,6 +13,8 @@ function Layout() {
             <Link to="terms-of-use">Terms Of Use</Link>
             <Link to="about-us">About Us</Link>
             <Link to="forget-password">Forget Password</Link>
+            <Link to="my-account">My Account</Link>
+            <Link to="my-favorites">My Favorites</Link>
             <Outlet />
         </div>
     );

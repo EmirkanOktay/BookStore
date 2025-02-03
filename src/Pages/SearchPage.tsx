@@ -83,7 +83,7 @@ const SearchPage = () => {
                         <Box>
                             <Container>
                                 {query && (
-                                    <Typography variant="h5" sx={{ fontWeight: '600' }}>
+                                    <Typography variant="h5" sx={{ fontWeight: '600', marginTop: '30px' }}>
                                         Search Results for "{query}"
                                     </Typography>
                                 )}

@@ -19,3 +19,9 @@ export const validationSchemaForLogin = object().shape({
 export const validationSchemaForResetPassword = object().shape({
     email: string().trim().lowercase().required("Email is required").email("Invalid email format")
 })
+
+export const validationSchemaForAccountInfo = object().shape({
+    birthday: string().trim().required("Birthday is required"),
+    phoneNumber: string().trim().required("Phone number is required").matches(/^[0-9]*$/, ' Phone number must include number'),
+    email: string().trim().lowercase().required("Email is required").email("Invalid email format")
+})

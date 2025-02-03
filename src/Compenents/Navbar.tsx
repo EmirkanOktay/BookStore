@@ -113,7 +113,7 @@ export const menuItems = [
 
 export const handleSubmit = async (
     values: formValuesForLogin,
-    setMemberStatus: (status: boolean) => void // ✅ Parametre olarak al
+    setMemberStatus: (status: boolean) => void
 ) => {
     try {
         const userCredential = await signInWithEmailAndPassword(
@@ -124,7 +124,7 @@ export const handleSubmit = async (
         const user = userCredential.user;
         if (user) {
             toast.success("Successfully Logged In");
-            setMemberStatus(true); // ✅ Burada parametre olarak aldığımız fonksiyonu kullanıyoruz.
+            setMemberStatus(true);
         }
     } catch (error: any) {
         toast.error("Error logging in: " + error.message);
@@ -312,7 +312,14 @@ const Navbar: React.FC = () => {
                             ))}
                         </Menu>
 
-                        <StyledIconButton color="inherit" className="favorite" onClick={toggleDrawerForFav}>
+                        <StyledIconButton color="inherit" className="favorite" onClick={() => {
+                            if (memberStatus) {
+                                navigate("/myfavorites");
+                            }
+                            else {
+                                toggleDrawerForFav();
+                            }
+                        }}>
                             <Badge badgeContent={2} color="error">
                                 <FavoriteIcon />
                             </Badge>
@@ -417,7 +424,7 @@ const Navbar: React.FC = () => {
                                     </>
 
                                 ) : (
-                                    <Typography>Some other content when memberStatus is true</Typography>
+                                    <div></div>
                                 )}
 
                             </Box>
@@ -441,16 +448,26 @@ const Navbar: React.FC = () => {
                             </Box>
                         </Drawer>
 
-                        <StyledIconButton color="inherit" className='icons' onClick={toggleDrawerForAccount}>
+                        <StyledIconButton color="inherit" className='icons' onClick={() => {
+                            if (memberStatus) {
+                                navigate("/myaccount")
+                            }
+                            else {
+                                toggleDrawerForAccount();
+                            }
+                        }}>
                             <AccountCircleIcon />
                         </StyledIconButton>
-                        <Drawer
-                            anchor="right"
-                            open={drawerOpenForAccount}
-                            onClose={toggleDrawerForAccount}
-                        >
-                            <Box sx={{ width: 300, padding: 2, marginTop: '50px' }}>
-                                {memberStatus === false ? (
+                        {memberStatus === false ? (
+
+
+                            <Drawer
+                                anchor="right"
+                                open={drawerOpenForAccount}
+                                onClose={toggleDrawerForAccount}
+                            >
+                                <Box sx={{ width: 300, padding: 2, marginTop: '50px' }}>
+
                                     <Formik
                                         initialValues={initalValues}
                                         validationSchema={validationSchemaForLogin}
@@ -540,12 +557,14 @@ const Navbar: React.FC = () => {
                                             </Form>
                                         )}
                                     </Formik>
-                                ) : (
-                                    <Typography>Some other content when memberStatus is true</Typography>
-                                )}
-                            </Box>
 
-                        </Drawer>
+                                </Box>
+
+                            </Drawer>
+                        )
+                            : (
+                                <div></div>
+                            )}
                     </Box>
                 </Toolbar >
             </AppBar >

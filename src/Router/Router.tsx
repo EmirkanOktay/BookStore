@@ -11,6 +11,15 @@ import AboutUs from '../Pages/AboutUs';
 import ForgetPassword from '../Pages/ForgetPassword';
 import SearchPage from '../Pages/SearchPage';
 import ProductDetails from '../Pages/ProductDetails';
+import UserAccount from '../Pages/UserAccount';
+import UserFavorite from '../Pages/UserFavorites'
+import PrivateRoute from './PrivateRouter';
+import MyAccountInfo from '../Pages/UserAccountInfo';
+import UserOrders from '../Pages/UserOrders';
+import UserLocation from '../Pages/userLocation';
+import UserMessages from '../Pages/userMessages';
+
+
 export default function Router() {
     return (
         <Routes>
@@ -26,7 +35,48 @@ export default function Router() {
             <Route path="/search/:query" element={<SearchPage />} />
             <Route path="/genre/:genre" element={<SearchPage />} />
             <Route path="/product/:query" element={<ProductDetails />} />
+            <Route path='myfavorites' element={<UserFavorite />} />
+            <Route
+                path="/myaccount"
+                element={
+                    <PrivateRoute>
+                        <UserAccount />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/myaccountInfo"
+                element={
+                    <PrivateRoute>
+                        <MyAccountInfo />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/myOrders"
+                element={
+                    <PrivateRoute>
+                        <UserOrders />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/myLocations"
+                element={
+                    <PrivateRoute>
+                        <UserLocation />
+                    </PrivateRoute>
+                }
+            />
+            <Route
+                path="/myMessages"
+                element={
+                    <PrivateRoute>
+                        <UserMessages />
+                    </PrivateRoute>
+                }
+            />
             <Route path="*" element={<NotFound />} />
         </Routes>
-    )
+    );
 }
