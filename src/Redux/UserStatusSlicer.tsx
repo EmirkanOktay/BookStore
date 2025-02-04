@@ -3,6 +3,7 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 interface MemberContextType {
     memberStatus: boolean;
     setMemberStatus: (status: boolean) => void;
+    balance: number;
 }
 
 interface MemberProviderProps {
@@ -15,7 +16,7 @@ export const MemberProvider: React.FC<MemberProviderProps> = ({ children }) => {
     const [memberStatus, setMemberStatus] = useState(false);
 
     return (
-        <MemberContext.Provider value={{ memberStatus, setMemberStatus }}>
+        <MemberContext.Provider value={{ memberStatus, setMemberStatus, balance: 1000 }}>
             {children}
         </MemberContext.Provider>
     );

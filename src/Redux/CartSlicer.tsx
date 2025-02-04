@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { productType } from "./FavoritesSlicer";
+import { toast } from "react-toastify";
 
 interface cartContexType {
     cart: productType[];
@@ -16,11 +17,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const addToCart = (item: productType) => {
         setCart((prev) => [...prev, item]);
-
-
+        toast.success("Added to cart!");
     }
-    const removeFromCart = (name: string) => {
-        setCart((prev) => prev.filter((item) => item.name !== name));
+    const removeFromCart = (title: string) => {
+        setCart((prev) => prev.filter((item) => item.title !== title));
     }
     const didBuy = (choice: boolean) => {
 

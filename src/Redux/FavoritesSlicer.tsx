@@ -1,10 +1,10 @@
-import { createContext, ReactNode, useContext, useState, useEffect } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { userMemberStatus } from "./UserStatusSlicer";
 import { toast } from "react-toastify";
 
 export interface productType {
-    name: string;
-    author: string;
+    title: string;
+    authors: string;
     img: string;
     price: number;
 }
@@ -30,13 +30,26 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
             return;
         }
 
-        setFavorites((prev) => [...prev, item]);
-        setFavoritesCount(favoritesCount + 1);
+        const isAlreadyFavorite = favorites.some((favorite) => favorite.title === item.title);
+
+        if (!isAlreadyFavorite) {
+            setFavorites((prevFavorites) => [...prevFavorites, item]);
+            setFavoritesCount((prevCount) => prevCount + 1);
+            toast.success("Added to favorites!");
+        } else {
+            toast.error("This product is already in your favorites");
+        }
     };
 
+
     const removeFromFavorites = (name: string) => {
-        setFavorites((prev) => prev.filter((item) => item.name !== name));
+        setFavorites((prev) => prev.filter((item) => item.title !== name));
         setFavoritesCount(favoritesCount - 1);
+        try {
+            toast.success("Removed from favorites!");
+        } catch (error: any) {
+            toast.error(error.message);
+        }
     };
 
     const countProductsFavorite = (products: productType[]) => {
