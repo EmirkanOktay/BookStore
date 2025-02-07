@@ -10,7 +10,6 @@ import { fetchBooks } from "../Redux/QueryBookSlicer";
 import { RootState, AppDispatch } from "../Redux/Store";
 import { StyledButton } from "../Compenents/LatestBooks";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { decidePrice } from "../Compenents/LatestBooks";
 import { fetcBookshWithType } from "../Redux/TypeOfBooks";
 import { useCart } from "../Redux/CartSlicer";
 
@@ -133,7 +132,7 @@ const SearchPage = () => {
                                                     {book.volumeInfo.authors?.join(", ")}
                                                 </Typography>
                                                 <Typography variant="h5" sx={{ marginBottom: '10px', fontWeight: '700', color: '#222' }}>
-                                                    {`${decidePrice()}$`}
+                                                    {book.price}$
                                                 </Typography>
 
                                                 <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
@@ -183,13 +182,14 @@ const SearchPage = () => {
                                                     {book.volumeInfo.authors?.join(", ")}
                                                 </Typography>
                                                 <Typography variant="h5" sx={{ marginBottom: '10px', fontWeight: '700', color: '#222' }}>
-                                                    {`${decidePrice()}$`}
+                                                    {book.price}$
                                                 </Typography>
 
                                                 <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                                                    <StyledButton variant="contained" startIcon={<AddShoppingCartIcon />}>
+                                                    <StyledButton variant="contained" startIcon={<AddShoppingCartIcon />} onClick={() => addToCart(book)}>
                                                         Add To Cart
                                                     </StyledButton>
+
                                                 </Box>
                                             </Box>
                                         </Grid>

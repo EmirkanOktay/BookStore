@@ -45,7 +45,10 @@ const genreBookSlicer = createSlice({
             })
             .addCase(fetcBookshWithType.fulfilled, (state, action) => {
                 state.loadingForGenre = false;
-                state.booksGenre = action.payload;
+                state.booksGenre = action.payload.map((book: any) => ({
+                    ...book,
+                    price: (Math.floor(Math.random() * 91) + 10).toFixed(2),
+                }));
             })
             .addCase(fetcBookshWithType.rejected, (state, action) => {
                 state.loadingForGenre = false;

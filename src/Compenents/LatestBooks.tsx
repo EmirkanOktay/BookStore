@@ -19,10 +19,11 @@ export const decidePrice = () => {
     if (price < 10) {
         price = Math.floor(Math.random() * 101);
     }
-    return price.toFixed(2);
-}
 
-export const StyledButton = styled(Button)(({ theme }) => ({
+    return parseFloat(price.toFixed(2));
+};
+
+export const StyledButton = styled(Button)(({ }) => ({
     backgroundColor: '#f50057',
     color: 'white',
     '&:hover': {
@@ -146,7 +147,7 @@ function LatestBooks() {
                                         {book.volumeInfo.authors}
                                     </Typography>
                                     <Typography variant="h5" sx={{ marginBottom: '10px', fontWeight: '700', color: '#222' }}>
-                                        {`${decidePrice()}$`}
+                                        ${book.price}$
                                     </Typography>
 
                                     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>

@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 
 function Login() {
     const [visibilityOfPassword, setVisibilityOfPassword] = useState(false);
-    const { memberStatus, setMemberStatus } = userMemberStatus();
+    const { setMemberStatus } = userMemberStatus();
 
     const showOrHidePassword = () => {
         setVisibilityOfPassword(!visibilityOfPassword);

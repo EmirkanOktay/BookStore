@@ -32,6 +32,7 @@ export const boxStyle = {
     }
 };
 function UserAccount() {
+
     const navigate = useNavigate();
     const isMember = useSelector(userMemberStatus);
 

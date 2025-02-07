@@ -139,7 +139,7 @@ function TopSeller() {
                                         {book.volumeInfo.authors}
                                     </Typography>
                                     <Typography variant="h5" sx={{ marginBottom: '10px', fontWeight: '700', color: '#222' }}>
-                                        {`${decidePrice()}$`}
+                                        {book.price}$
                                     </Typography>
 
                                     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>

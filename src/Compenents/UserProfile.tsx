@@ -14,7 +14,7 @@ const UserProfile = () => {
     const auth = getAuth();
     const user = auth.currentUser;
     const navigate = useNavigate();
-    const { memberStatus, setMemberStatus } = userMemberStatus();
+    const { setMemberStatus } = userMemberStatus();
 
     const [userData, setUserData] = useState<{ name: string; lastName: string; email: string }>({
         name: "",

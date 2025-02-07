@@ -7,6 +7,7 @@ export interface productType {
     authors: string;
     img: string;
     price: number;
+    id: string;
 }
 
 interface FavoritesContextType {

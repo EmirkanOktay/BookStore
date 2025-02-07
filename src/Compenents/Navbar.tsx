@@ -135,12 +135,11 @@ export const handleSubmit = async (
 
 const Navbar: React.FC = () => {
     const { countProductsFavorite, favorites } = useFavorites();
-    const { cart, countProductsCart, didBuy, removeFromCart, addToCart } = useCart();
+    const { countProductsCart } = useCart();
     const { memberStatus, setMemberStatus } = userMemberStatus();
 
     const navigate = useNavigate();
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [menuAnchorEl, setMenuAnchorEl] = React.useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [drawerOpenForFavorite, setDrawerOpenForFavorite] = useState(false);
@@ -433,7 +432,7 @@ const Navbar: React.FC = () => {
                         </Drawer>
 
                         <StyledIconButton color="inherit" className='icons' onClick={toggleDrawerForCart}>
-                            <Badge badgeContent={countProductsCart(cart)} color="error">
+                            <Badge badgeContent={countProductsCart()} color="error">
                                 <ShoppingCartIcon />
                             </Badge>
                         </StyledIconButton>

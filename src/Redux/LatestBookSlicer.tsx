@@ -36,8 +36,12 @@ const topSellBooks = createSlice({
             })
             .addCase(getLatestBook.fulfilled, (state, action) => {
                 state.load = "Succeeded";
-                state.books = action.payload.items;
+                state.books = action.payload.items.map((book: any) => ({
+                    ...book,
+                    price: (Math.floor(Math.random() * 91) + 10).toFixed(2)
+                }))
             })
+
             .addCase(getLatestBook.rejected, (state, action) => {
                 state.load = 'Failed';
                 state.error = action.error.message || "something went wrong";

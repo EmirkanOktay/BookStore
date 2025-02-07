@@ -64,6 +64,10 @@ const latestBookSlicer = createSlice({
             .addCase(get1984.fulfilled, (state, action) => {
                 state.load = "Succeeded";
                 state.books1984 = action.payload.items;
+                state.books1984 = action.payload.items.map((book: any) => ({
+                    ...book,
+                    price: (Math.floor(Math.random() * 91) + 10).toFixed(2)
+                }))
             })
             .addCase(get1984.rejected, (state, action) => {
                 state.load = 'Failed';
@@ -77,6 +81,10 @@ const latestBookSlicer = createSlice({
             .addCase(getWarAndPeace.fulfilled, (state, action) => {
                 state.load = "Succeeded";
                 state.booksWarAndPeace = action.payload.items;
+                state.booksWarAndPeace = action.payload.items.map((book: any) => ({
+                    ...book,
+                    price: (Math.floor(Math.random() * 91) + 10).toFixed(2)
+                }))
             })
             .addCase(getWarAndPeace.rejected, (state, action) => {
                 state.load = 'Failed';
@@ -90,6 +98,10 @@ const latestBookSlicer = createSlice({
             .addCase(getHarryPotter.fulfilled, (state, action) => {
                 state.load = "Succeeded";
                 state.booksHarryPotter = action.payload.items;
+                state.booksHarryPotter = action.payload.items.map((book: any) => ({
+                    ...book,
+                    price: (Math.floor(Math.random() * 91) + 10).toFixed(2)
+                }))
             })
             .addCase(getHarryPotter.rejected, (state, action) => {
                 state.load = 'Failed';
@@ -103,6 +115,10 @@ const latestBookSlicer = createSlice({
             .addCase(getCrimeandPunishment.fulfilled, (state, action) => {
                 state.load = "Succeeded";
                 state.booksCrimeAndPunishment = action.payload.items;
+                state.booksCrimeAndPunishment = action.payload.items.map((book: any) => ({
+                    ...book,
+                    price: (Math.floor(Math.random() * 91) + 10).toFixed(2)
+                }))
             })
             .addCase(getCrimeandPunishment.rejected, (state, action) => {
                 state.load = 'Failed';
