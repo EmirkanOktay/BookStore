@@ -29,11 +29,14 @@ function MyAccountInfo() {
     const [getEmail, setGetEmail] = useState("");
     const [phoneCode, setPhoneCode] = useState("+1");
 
-    const [userData, setUserData] = useState<{ name: string; lastName: string; email: string }>({
-        name: "",
-        lastName: "",
-        email: "",
-    });
+
+    interface UserProfileProps {
+        userData: {
+            name: string;
+            lastName: string;
+            email: string;
+        };
+    }
 
     useEffect(() => {
         const fetchUserData = async () => {

@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Skeleton from '@mui/material/Skeleton';
-import { decidePrice } from "./LatestBooks";
 import { StyledButton } from "./LatestBooks";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../Redux/CartSlicer";

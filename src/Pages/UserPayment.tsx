@@ -9,7 +9,7 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function UserPayment() {
-    const { addToCart, removeFromCart, didBuy, cart } = useCart();
+    const { removeFromCart, didBuy, cart } = useCart();
 
     // totalPrice hesaplanıyor
     const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -79,7 +79,7 @@ function UserPayment() {
                                 }}>
                                     {item.quantity} = ${(item.price * item.quantity).toFixed(2)}
                                 </p>
-                                <Button onClick={() => { removeFromCart(item.title) }} sx={{
+                                <Button onClick={() => { removeFromCart(item.volumeInfo.title) }} sx={{
                                     color: 'white',
                                     backgroundColor: '#d32f2f',
                                     marginTop: '10px',
@@ -100,7 +100,7 @@ function UserPayment() {
                 {cart.length > 0 && (
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
                         <Button
-                            onClick={() => { didBuy(cart) }}
+                            onClick={() => { didBuy(cart.length > 0) }}
                             sx={{
                                 color: 'white',
                                 backgroundColor: 'green',
@@ -123,6 +123,7 @@ function UserPayment() {
                             </span>
                             <ShoppingCartIcon sx={{ marginLeft: '10px' }} />
                         </Button>
+
                     </div>
                 )}
             </div>

@@ -3,11 +3,18 @@ import { userMemberStatus } from "./UserStatusSlicer";
 import { toast } from "react-toastify";
 
 export interface productType {
-    title: string;
-    authors: string;
-    img: string;
+    id: string;
+    volumeInfo: {
+        title: string;
+        authors: string[];
+        imageLinks: {
+            smallThumbnail: string;
+        };
+        publisher: string;
+    };
     price: number;
 }
+
 
 interface FavoritesContextType {
     favorites: productType[];
@@ -30,7 +37,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
             return;
         }
 
-        const isAlreadyFavorite = favorites.some((favorite) => favorite.title === item.title);
+        const isAlreadyFavorite = favorites.some((favorite) => favorite.volumeInfo.title === item.volumeInfo.title);
 
         if (!isAlreadyFavorite) {
             setFavorites((prevFavorites) => [...prevFavorites, item]);
@@ -43,7 +50,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
 
 
     const removeFromFavorites = (name: string) => {
-        setFavorites((prev) => prev.filter((item) => item.title !== name));
+        setFavorites((prev) => prev.filter((item) => item.volumeInfo.title !== name));
         setFavoritesCount(favoritesCount - 1);
         try {
             toast.success("Removed from favorites!");
