@@ -15,10 +15,8 @@ import UserAccount from '../Pages/UserAccount';
 import UserFavorite from '../Pages/UserFavorites'
 import PrivateRoute from './PrivateRouter';
 import MyAccountInfo from '../Pages/UserAccountInfo';
-import UserOrders from '../Pages/UserOrders';
-import UserLocation from '../Pages/UserLocation';
 import UserMessages from '../Pages/userMessages';
-import Pay from '../Pages/Pay';
+import UserPayment from '../Pages/UserPayment';
 
 
 export default function Router() {
@@ -37,7 +35,6 @@ export default function Router() {
             <Route path="/genre/:genre" element={<SearchPage />} />
             <Route path="/product/:query" element={<ProductDetails />} />
             <Route path='myfavorites' element={<UserFavorite />} />
-            <Route path='pay' element={<Pay />} />
 
             <Route
                 path="/myaccount"
@@ -56,18 +53,18 @@ export default function Router() {
                 }
             />
             <Route
-                path="/myOrders"
+                path="/pay"
                 element={
                     <PrivateRoute>
-                        <UserOrders />
+                        <UserPayment />
                     </PrivateRoute>
                 }
             />
             <Route
-                path="/myLocations"
+                path="/UserPayment"
                 element={
                     <PrivateRoute>
-                        <UserLocation />
+                        <UserPayment />
                     </PrivateRoute>
                 }
             />

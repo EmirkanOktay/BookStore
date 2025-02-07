@@ -53,7 +53,14 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const didBuy = (choice: boolean) => {
-        if (choice) setCart([]);
+        if (choice) {
+            try {
+                toast.success("Thank you for your purchase!");
+                setCart([]);
+            } catch (error) {
+                toast.error("Error: " + error);
+            }
+        }
     };
 
     const countProductsCart = () => {

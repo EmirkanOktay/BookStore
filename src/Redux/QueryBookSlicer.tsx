@@ -4,7 +4,6 @@ import axios from "axios";
 export const fetchBooks = createAsyncThunk(
     "books/fetchBooks",
     async (query: string) => {
-        const apiKey = import.meta.env.VITE_Book_Key;
         const apiLink = `https://www.googleapis.com/books/v1/volumes?q=${query}&langRestrict=en&maxResults=28&key$={apiKey}`;
 
         const response = await axios.get(apiLink);

@@ -8,10 +8,12 @@ import UserProfile from "../Compenents/UserProfile"
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import { Button } from "@mui/material"
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useNavigate } from "react-router-dom"
 function UserFavorites() {
 
     const { favorites, removeFromFavorites } = useFavorites();
     const { addToCart } = useCart();
+    const navigate = useNavigate();
 
     return (
         <div>
@@ -61,13 +63,13 @@ function UserFavorites() {
                                         height: '200px',
                                         objectFit: 'cover',
                                         borderRadius: '8px',
-                                        marginBottom: '15px'
+                                        marginBottom: '15px',
+                                        cursor: 'pointer'
                                     }}
                                 />
                                 <div style={{ textAlign: 'center' }}>
                                     <h3 style={{ fontSize: '18px', fontWeight: 'bold' }}>{item.title}</h3>
                                     <p style={{ fontSize: '14px', color: '#555' }}>By: {item.authors.join(', ')}</p>
-                                    <p style={{ fontSize: '16px', color: '#000' }}>${item.price}</p>
                                     <Button onClick={() => { removeFromFavorites(item.title) }} sx={{
                                         color: 'white',
                                         backgroundColor: '#d32f2f',

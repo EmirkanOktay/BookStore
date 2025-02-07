@@ -66,9 +66,9 @@ function UserAccount() {
                             }}
                         >
                             <Box sx={boxStyle}>
-                                <div onClick={() => navigate("/myOrders")}>
+                                <div onClick={() => navigate("/pay")}>
                                     <ShoppingCartIcon sx={{ fontSize: 40, color: "primary.main" }} />
-                                    <Typography>My Orders</Typography>
+                                    <Typography>Payment</Typography>
                                 </div>
                             </Box>
                             <Box sx={boxStyle}>
