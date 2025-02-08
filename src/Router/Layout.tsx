@@ -15,7 +15,6 @@ function Layout() {
             <Link to="forget-password">Forget Password</Link>
             <Link to="my-account">My Account</Link>
             <Link to="my-favorites">My Favorites</Link>
-            <Link to="Pay">Pay</Link>
             <Outlet />
         </div>
     );
