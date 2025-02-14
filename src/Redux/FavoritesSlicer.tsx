@@ -5,12 +5,12 @@ import { toast } from "react-toastify";
 export interface productType {
     id: string;
     volumeInfo: {
-        title: string;
         authors: string[];
         imageLinks: {
             smallThumbnail: string;
         };
         publisher: string;
+        title: string;
     };
     price: number;
 }

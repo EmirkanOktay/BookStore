@@ -29,11 +29,12 @@ function ProductDetails() {
             fetch(`https://www.googleapis.com/books/v1/volumes/${query}`)
                 .then(response => response.json())
                 .then(data => {
-                    setBook(data.volumeInfo);
+                    setBook(data);
                     setLoading(false);
                 })
                 .catch(err => {
-                    setError('Error fetching book details' + err);
+                    console.error('Error fetching book details:', err);
+                    setError('Error fetching book details: ' + err.message);
                     setLoading(false);
                 });
         }
@@ -115,7 +116,8 @@ function ProductDetails() {
                                     </Typography>
                                     <div style={{ display: 'flex' }}>
                                         <div>
-                                            <StyledButton style={{ marginRight: '50px' }} variant="contained" startIcon={<AddShoppingCartIcon />} onClick={() => addToCart(book)}>
+                                            <StyledButton style={{ marginRight: '50px' }} variant="contained" startIcon={<AddShoppingCartIcon />}
+                                                onClick={() => addToCart(book)}>
                                                 Add To Cart
                                             </StyledButton>
                                             <div onClick={() => addToFavorites(book)}>

@@ -17,8 +17,7 @@ import PrivateRoute from './PrivateRouter';
 import MyAccountInfo from '../Pages/UserAccountInfo';
 import UserMessages from '../Pages/userMessages';
 import UserPayment from '../Pages/UserPayment';
-import UserLocation from '../Pages/UserLocations';
-
+import UserLocation from '../Pages/userLocations';
 
 export default function Router() {
     return (

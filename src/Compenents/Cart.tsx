@@ -44,8 +44,8 @@ function Cart() {
                                     marginRight: '40px'
                                 }}>
                                     <img
-                                        src={item.volumeInfo.imageLinks?.smallThumbnail || 'https://via.placeholder.com/200'}
-                                        alt={item.volumeInfo.title}
+                                        src={item.volumeInfo?.imageLinks?.smallThumbnail || 'https://via.placeholder.com/200'}
+                                        alt={item?.volumeInfo?.title}
                                         style={{
                                             width: '150px',
                                             height: '200px',
@@ -65,13 +65,13 @@ function Cart() {
                                             textOverflow: 'ellipsis',
                                             whiteSpace: 'nowrap',
                                         }}>
-                                            {item.volumeInfo.title}
+                                            {item?.volumeInfo?.title}
                                         </h3>
                                         <p style={{ fontSize: '12px', color: '#555', marginBottom: '5px' }}>
-                                            {item.volumeInfo.publisher}
+                                            {item?.volumeInfo?.publisher}
                                         </p>
                                         <p style={{ fontSize: '12px', color: '#555', marginBottom: '5px' }}>
-                                            {item.volumeInfo.authors?.join(", ")}
+                                            {item?.volumeInfo?.authors?.join(", ")}
                                         </p>
                                         <p style={{
                                             fontSize: '14px',
