@@ -7,6 +7,7 @@ import UserProfile from "../Compenents/UserProfile";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const validationSchemaForAccountInfo = Yup.object().shape({
     name: Yup.string().trim().required("Name is required"),
@@ -35,7 +36,13 @@ function UserLocation() {
     });
 
     const handleSubmit = (values: any) => {
-        console.log("Form submitted:", values);
+
+        if (values) {
+            toast.success("Changes saved successfully!");
+        }
+        else {
+            toast.error("An error occurred. Please try again later.");
+        }
     };
 
     return (
@@ -83,10 +90,10 @@ function UserLocation() {
                                                     fullWidth
                                                     name="name"
                                                     label="First Name"
+                                                    as={TextField}
                                                     value={values.name}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
                                                     error={touched.name && Boolean(errors.name)}
                                                     helperText={touched.name && errors.name}
                                                 />
@@ -97,10 +104,10 @@ function UserLocation() {
                                                     fullWidth
                                                     name="lastName"
                                                     label="Last Name"
+                                                    as={TextField}
                                                     value={values.lastName}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
                                                     error={touched.lastName && Boolean(errors.lastName)}
                                                     helperText={touched.lastName && errors.lastName}
                                                 />
@@ -114,10 +121,10 @@ function UserLocation() {
                                                     type="date"
                                                     InputLabelProps={{ shrink: true }}
                                                     inputProps={{ max: currentFullDate }}
+                                                    as={TextField}
                                                     value={values.birthday}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
                                                     error={touched.birthday && Boolean(errors.birthday)}
                                                     helperText={touched.birthday && errors.birthday}
                                                 />
@@ -130,10 +137,10 @@ function UserLocation() {
                                                     label="Phone Number"
                                                     type="tel"
                                                     placeholder="555 123 45 67"
+                                                    as={TextField}
                                                     value={values.phoneNumber}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
                                                     error={touched.phoneNumber && Boolean(errors.phoneNumber)}
                                                     helperText={touched.phoneNumber && errors.phoneNumber}
                                                 />
@@ -146,10 +153,10 @@ function UserLocation() {
                                                     label="Email"
                                                     type="email"
                                                     placeholder={userData.email || "yourmail@example.com"}
+                                                    as={TextField}
                                                     value={values.email}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
                                                     error={touched.email && Boolean(errors.email)}
                                                     helperText={touched.email && errors.email}
                                                 />
@@ -160,10 +167,10 @@ function UserLocation() {
                                                     fullWidth
                                                     name="address"
                                                     label="Address"
+                                                    as={TextField}
                                                     value={values.address}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
                                                     error={touched.address && Boolean(errors.address)}
                                                     helperText={touched.address && errors.address}
                                                 />
@@ -174,10 +181,10 @@ function UserLocation() {
                                                     fullWidth
                                                     name="postalCode"
                                                     label="Postal Code"
+                                                    as={TextField}
                                                     value={values.postalCode}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
                                                     error={touched.postalCode && Boolean(errors.postalCode)}
                                                     helperText={touched.postalCode && errors.postalCode}
                                                 />

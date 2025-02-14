@@ -93,8 +93,8 @@ function ProductDetails() {
                             <Grid container alignItems="center">
                                 <Grid item xs={12} md={6}>
                                     <img
-                                        src={book.imageLinks?.smallThumbnail || 'https://via.placeholder.com/200'}
-                                        alt={book.title}
+                                        src={book.volumeInfo?.imageLinks?.smallThumbnail || 'https://via.placeholder.com/200'}
+                                        alt={book.volumeInfo?.title}
                                         height={300}
                                         style={{ marginBottom: '10px', borderRadius: '4px', marginLeft: '50px', marginTop: '30px' }}
                                     />
@@ -102,13 +102,13 @@ function ProductDetails() {
 
                                 <Grid item xs={12} md={6}>
                                     <Typography variant="h5" sx={{ fontWeight: '600', marginBottom: '10px' }}>
-                                        {book.title}
+                                        {book.volumeInfo?.title}
                                     </Typography>
                                     <Typography variant="body1" sx={{ marginBottom: '10px' }}>
-                                        {book.authors?.join(", ")}
+                                        {book.volumeInfo?.authors?.join(", ")}
                                     </Typography>
                                     <Typography variant="body2" sx={{ marginBottom: '10px', marginRight: '50px' }}>
-                                        {stripHtml(book.description || "No description available.")}
+                                        {stripHtml(book.volumeInfo?.description || "No description available.")}
                                     </Typography>
 
                                     <Typography variant="h5" sx={{ marginBottom: '10px', fontWeight: '700', color: '#222' }}>
@@ -133,11 +133,11 @@ function ProductDetails() {
 
                             <Box sx={{ marginTop: '30px', marginBottom: '40px' }}>
                                 <Typography variant="h6" sx={{ fontWeight: '600', marginBottom: '10px' }}>Book Details</Typography>
-                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Author:</strong> {book.authors?.join(",") || "Not Available"}</Typography>
-                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Publisher:</strong> {book.publisher || "Not Available"}</Typography>
-                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Language:</strong> {book.language || "Not Available"}</Typography>
-                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Page Count:</strong> {book.pageCount || "Not Available"}</Typography>
-                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Categories:</strong> {book.categories?.join(", ") || "Not Available"}</Typography>
+                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Author:</strong> {book.volumeInfo?.authors?.join(",") || "Not Available"}</Typography>
+                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Publisher:</strong> {book.volumeInfo?.publisher || "Not Available"}</Typography>
+                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Language:</strong> {book.volumeInfo?.language || "Not Available"}</Typography>
+                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Page Count:</strong> {book.volumeInfo?.pageCount || "Not Available"}</Typography>
+                                <Typography sx={{ marginBottom: '5px' }} variant="body2"><strong>Categories:</strong> {book.volumeInfo?.categories?.join(", ") || "Not Available"}</Typography>
                             </Box>
                         </>
                     ) : (

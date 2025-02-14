@@ -1,4 +1,4 @@
-import { Box, Container, Grid, TextField, Typography, Button, MenuItem, Select, InputAdornment } from "@mui/material";
+import { Box, Container, Grid, TextField, Typography, Button } from "@mui/material";
 import Footer from "../Compenents/Footer";
 import HeaderNav from "../Compenents/HeaderNav";
 import Navbar from "../Compenents/Navbar";
@@ -27,16 +27,11 @@ function MyAccountInfo() {
     const [getUserBirth] = useState("");
     const [getPhone] = useState("");
     const [getEmail, setGetEmail] = useState("");
-    const [phoneCode, setPhoneCode] = useState("+1");
-
-
-    interface UserProfileProps {
-        userData: {
-            name: string;
-            lastName: string;
-            email: string;
-        };
-    }
+    const [userData, setUserData] = useState({
+        name: "",
+        lastName: "",
+        email: "",
+    });
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -102,10 +97,10 @@ function MyAccountInfo() {
                                                     type="date"
                                                     InputLabelProps={{ shrink: true }}
                                                     inputProps={{ max: currentFullDate }}
+                                                    as={TextField}
                                                     value={values.birthday}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
                                                     error={touched.birthday && Boolean(errors.birthday)}
                                                     helperText={touched.birthday && errors.birthday}
                                                 />
@@ -118,26 +113,11 @@ function MyAccountInfo() {
                                                     label="Phone Number"
                                                     type="tel"
                                                     placeholder="555 123 45 67"
+                                                    as={TextField}
                                                     value={values.phoneNumber}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
-                                                    InputProps={{
-                                                        startAdornment: (
-                                                            <InputAdornment position="start">
-                                                                <Select
-                                                                    value={phoneCode}
-                                                                    onChange={(e) => setPhoneCode(e.target.value)}
-                                                                >
-                                                                    <MenuItem value="+1">+1 🇺🇸</MenuItem>
-                                                                    <MenuItem value="+44">+44 🇬🇧</MenuItem>
-                                                                    <MenuItem value="+49">+49 🇩🇪</MenuItem>
-                                                                    <MenuItem value="+33">+33 🇫🇷</MenuItem>
-                                                                    <MenuItem value="+90">+90 🇹🇷</MenuItem>
-                                                                </Select>
-                                                            </InputAdornment>
-                                                        ),
-                                                    }}
+
                                                     error={touched.phoneNumber && Boolean(errors.phoneNumber)}
                                                     helperText={touched.phoneNumber && errors.phoneNumber}
                                                 />
@@ -150,10 +130,10 @@ function MyAccountInfo() {
                                                     label="Email"
                                                     type="email"
                                                     placeholder={userData.email || "yourmail@example.com"}
+                                                    as={TextField}
                                                     value={values.email}
                                                     onChange={handleChange}
                                                     onBlur={handleBlur}
-                                                    component={TextField}
                                                     error={touched.email && Boolean(errors.email)}
                                                     helperText={touched.email && errors.email}
                                                 />

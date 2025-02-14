@@ -56,8 +56,8 @@ function UserFavorites() {
                                 alignItems: 'center'
                             }}>
                                 <img
-                                    src={item.imageLinks?.thumbnail}
-                                    alt={item.title}
+                                    src={item?.volumeInfo.imageLinks?.smallThumbnail}
+                                    alt={item?.volumeInfo.title}
                                     style={{
                                         width: '150px',
                                         height: '200px',
@@ -66,11 +66,11 @@ function UserFavorites() {
                                         marginBottom: '15px',
                                         cursor: 'pointer'
                                     }}
-                                />
+                                    onClick={() => navigate(`/product/${item.id}`)} />
                                 <div style={{ textAlign: 'center' }}>
-                                    <h3 style={{ fontSize: '18px', fontWeight: 'bold' }}>{item.title}</h3>
-                                    <p style={{ fontSize: '14px', color: '#555' }}>By: {item.authors.join(', ')}</p>
-                                    <Button onClick={() => { removeFromFavorites(item.title) }} sx={{
+                                    <h3 style={{ fontSize: '18px', fontWeight: 'bold' }}>{item?.volumeInfo?.title}</h3>
+                                    <p style={{ fontSize: '14px', color: '#555' }}>By: {item?.volumeInfo?.authors?.join(', ')}</p>
+                                    <Button onClick={() => { removeFromFavorites(item?.volumeInfo?.title) }} sx={{
                                         color: 'white',
                                         backgroundColor: '#d32f2f',
                                         marginTop: '10px',
